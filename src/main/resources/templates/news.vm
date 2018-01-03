@@ -1,0 +1,58 @@
+<html>
+<body>
+<pre>
+Hello VM.
+
+##注释
+#*注释
+* *#
+$!{value1}  ##value1传过来了
+$!{value2}  ##value2没有，不显示，template的特性
+${value3}
+
+
+#foreach ($color0 in $color)
+    Color $!{foreach.index}/$!{foreach.count}: $!{color0}
+#end
+
+
+#foreach($Key in $map.keySet())
+    Number:$!{foreach.index}/$!{foreach.count}:$!{Key} $map.get($Key)
+#end
+
+#foreach($kv in $map.entrySet())
+    Number:$!{foreach.index}/$!{foreach.count}:$!{kv.key} $!{kv.value}
+#end
+
+user:  $!{user.name}
+user:  $!{user.getName()}
+
+#set($title="nowcoder")
+Include:#include("header.vm")<br>
+Parse:#parse("header.vm")
+
+##    预定义函数，宏，即函数定义
+#macro (render_color $color, $index)
+    Color By Macro $index, $color
+#end
+
+##    调用函数
+#foreach ($color0 in $color)
+    #render_color($color0,$foreach.index)
+#end
+
+#set($hello="hello")
+#set($hword1="$!{hello},world")
+##双引号才会对模板引擎进行解析，单引号仅仅是文本
+#set($hword2='$!{hello},world')
+hword1:$hword1
+hword2:$hword2
+
+$!{color.size()}
+
+
+
+
+</pre>
+</body>
+</html>
