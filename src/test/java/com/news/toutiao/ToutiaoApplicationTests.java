@@ -21,6 +21,7 @@ public class ToutiaoApplicationTests {
 错误原因是因为，pom文件中版本改为1.3.5以后，在test文件中的测试文件中的SpringBootTest就不能识别：
 因为：@SpringBootTest注解是SpringBoot自1.4.0版本开始引入的一个用于测试的注解。
 
+所以要把test文件中的测试代码，改为1.3.5支持的测试代码，头文件，文件包等。
 
 */
 
