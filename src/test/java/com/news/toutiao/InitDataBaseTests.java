@@ -1,41 +1,35 @@
 package com.news.toutiao;
 
+import com.news.toutiao.model.User;
+import com.news.toutiao.dao.UserDAO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.util.Random;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ToutiaoApplication.class)
-@WebAppConfiguration
+@Sql("/init-schema.sql")  //add the init-schema.sql
 public class InitDataBaseTests {
+	@Autowired
+	UserDAO  userDAO;
 
 	@Test
 	public void contextLoads() {
+		for (int i=0;i<11;i++)
+		{
+			Random random=new Random();
+			User user=new User();
+			user.setHeadUrl(String.format("http://images.nowcoder.com/head/%dt.png", random.nextInt(1000)));
+			user.setName(String.format("USER%d",i));
+			user.setPassword("");
+			user.setSalt("");
+			userDAO.addUser(user);
+		}
 	}
 
 }
-
-/*
-错误原因是因为，pom文件中版本改为1.3.5以后，在test文件中的测试文件中的SpringBootTest就不能识别：
-因为：@SpringBootTest注解是SpringBoot自1.4.0版本开始引入的一个用于测试的注解。
-
-所以要把test文件中的测试代码，改为1.3.5支持的测试代码，头文件，文件包等。
-
-*/
-
-/*import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;  //也就是这行
-import org.springframework.test.context.junit4.SpringRunner;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class ToutiaoApplicationTests {
-
-	@Test
-	public void contextLoads() {
-	}
-
-}*/
