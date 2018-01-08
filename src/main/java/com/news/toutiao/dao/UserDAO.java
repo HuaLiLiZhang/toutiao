@@ -1,13 +1,13 @@
 package com.news.toutiao.dao;
 
 import com.news.toutiao.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by huali on 2018/1/8.
  */
+@Repository
 @Mapper
 public interface UserDAO {
     String TABLE_NAME = "user";
@@ -24,5 +24,12 @@ public interface UserDAO {
 
     @Select({"select",SELECT_FIELDS,"from",TABLE_NAME,"where id=#{id}"})
     User selectById(int id);
+
+    @Update({"update",TABLE_NAME,"set password=#{password} where id=#{id}"})
+    void updatePassword(User user);
+
+    @Delete({"delete from",TABLE_NAME,"where id=#{id}"})
+    void deleteById(int id);
+
 
 }

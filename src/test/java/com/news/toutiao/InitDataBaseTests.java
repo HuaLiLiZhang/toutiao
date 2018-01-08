@@ -2,6 +2,7 @@ package com.news.toutiao;
 
 import com.news.toutiao.model.User;
 import com.news.toutiao.dao.UserDAO;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class InitDataBaseTests {
 	UserDAO  userDAO;
 
 	@Test
-	public void contextLoads() {
+	public void initData() {
 		for (int i=0;i<11;i++)
 		{
 			Random random=new Random();
@@ -29,7 +30,17 @@ public class InitDataBaseTests {
 			user.setPassword("");
 			user.setSalt("");
 			userDAO.addUser(user);
+
+			user.setPassword("newpassword");
+			userDAO.updatePassword(user);
 		}
+
+		Assert.assertEquals("newpassword",userDAO.selectById(1).getPassword());
+		userDAO.deleteById(1);
+		Assert.assertNull(userDAO.selectById(1));
+
+
+
 	}
 
 }

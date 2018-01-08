@@ -123,6 +123,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
+			<version>5.0.8</version>
 		</dependency>
 
         <dependency>
