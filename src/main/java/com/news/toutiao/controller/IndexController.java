@@ -24,7 +24,7 @@ import java.util.*;
  * Created by huali on 2017/12/28.
  */
 
-@Controller  //注解
+//@Controller  //注解
 public class IndexController {
     private static final Logger logger= LoggerFactory.getLogger(IndexController.class);
 

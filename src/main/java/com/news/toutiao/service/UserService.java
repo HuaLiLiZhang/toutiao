@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 /**
  * Created by huali on 2018/1/8.
  */
-
+@Service
 public class UserService {
     @Autowired
     public UserDAO userDAO;

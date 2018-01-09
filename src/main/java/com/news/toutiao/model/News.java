@@ -1,6 +1,7 @@
 package com.news.toutiao.model;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 /**
  * Created by huali on 2018/1/8.
@@ -12,7 +13,7 @@ public class News {
     private String image;
     private int likeCount;
     private int commentCount;
-    private Date createDate;
+    private Date createdDate;
     private int userId;
 
     public int getId() {
@@ -63,12 +64,12 @@ public class News {
         this.commentCount = commentCount;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public int getUserId() {
