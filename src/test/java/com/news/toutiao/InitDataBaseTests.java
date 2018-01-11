@@ -46,7 +46,7 @@ public class InitDataBaseTests {
 			news.setLikeCount(i+1);
 			news.setUserId(i+1);
 			news.setTitle(String.format("TITLE{%d}",i));
-			news.setLink(String.format("http://www.nowcoder.com",i));
+			news.setLink(String.format("http://www.nowcoder.com/%d.html",i));
 
 			newsDAO.addNews(news);
 

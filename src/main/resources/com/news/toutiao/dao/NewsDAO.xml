@@ -3,7 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.news.toutiao.dao.NewsDAO">
     <sql id="table">news</sql>
-    <sql id="selectFields">id,title, link, image, like_count, comment_count,created_date,user_id
+    <!--<sql id="selectFields">id,title, link, image, like_count, comment_count,created_date,user_id
+    </sql>-->
+    <sql id="selectFields">id,title,link,image,like_count,comment_count,created_date,user_id
+
     </sql>
     <select id="selectByUserIdAndOffset" resultType="com.news.toutiao.model.News">
         SELECT

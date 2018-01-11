@@ -40,7 +40,7 @@ public class HomeController {
             vos.add(vo);
         }
         model.addAttribute("vos",vos);
-        return "aaa";
+        return "home";
     }
 
 

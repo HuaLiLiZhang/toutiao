@@ -107,6 +107,7 @@
         -->
 
         <div class="container" id="daily">
+            #set($cur_date='')
             <div class="jscroll-inner">
                 <div class="daily">
 
@@ -117,9 +118,10 @@
                     </h3>
 
                     <div class="posts">
+                        #foreach($vo in $vos)
                         <div class="post">
                             <div class="votebar">
-                                    <button class="click-like up" aria-pressed="false" title="赞同"><i class="vote-arrow"></i><span class="count">$!{vo.news.likeCount}</span></button>
+                                <button class="click-like up" aria-pressed="false" title="赞同"><i class="vote-arrow"></i><span class="count">$!{vo.news.likeCount}</span></button>
                                 <button class="click-dislike down" aria-pressed="true" title="反对"><i class="vote-arrow"></i>
                                 </button>
                             </div>
@@ -156,46 +158,6 @@
                             </div>
 
                             <div class="subject-name">来自 <a href="/user$!{vo.user.id}">$!{vo.user.id}</a></div>
-                        </div>
-                        #foreach($vo in $vos)
-                        <div class="post">
-                            <div class="votebar">
-                                <button class="click-like up" aria-pressed="false" title="赞同"><i class="vote-arrow"></i><span class="count">39</span></button>
-                                <button class="click-dislike down" aria-pressed="true" title="反对"><i class="vote-arrow"></i>
-                                </button>
-                            </div>
-                            <div class="content" data-url="http://nowcoder.com/posts/5l3hjr">
-                                <div class="content-img">
-                                    <img src="https://images.nowcoder.com/images/20160621/5094668_1466479598631_7C2C60506876716CCF0E706DB13D4511@0e_100w_100h_0c_1i_1o_90Q_1x" alt="">
-                                </div>
-                                <div class="content-main">
-                                    <h3 class="title">
-                                        <a target="_blank" rel="external nofollow" href="http://nowcoder.com/j/5l3hjr">高性能服务器架构思路</a>
-                                    </h3>
-                                    <div class="meta">
-                                        wetest.qq.com&nbsp;
-                                        <span>
-                                            <i class="fa icon-comment"></i> 1
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-info">
-                                <div class="user-avatar">
-                                    <a href="http://nowcoder.com/u/251205"><img width="32" class="img-circle" src="http://images.nowcoder.com/images/20141231/622873_1420036789276_622873_1420036771761_%E8%98%91%E8%8F%87.jpg@0e_200w_200h_0c_1i_1o_90Q_1x"></a>
-                                </div>
-
-                                <div class="info">
-                                    <h5>分享者</h5>
-
-                                    <a href="http://nowcoder.com/u/251205"><img width="48" class="img-circle" src="http://images.nowcoder.com/images/20141231/622873_1420036789276_622873_1420036771761_%E8%98%91%E8%8F%87.jpg@0e_200w_200h_0c_1i_1o_90Q_1x" alt="Thumb"></a>
-
-                                    <h4 class="m-b-xs">冰燕</h4>
-                                    <a class="btn btn-default btn-xs" href="http://nowcoder.com/signin"><i class="fa icon-eye"></i> 关注TA</a>
-                                </div>
-                            </div>
-
-                            <div class="subject-name">来自 <a href="http://nowcoder.com/subjects/127646">腾讯质量开放平台</a></div>
                         </div>
                         #end
 
