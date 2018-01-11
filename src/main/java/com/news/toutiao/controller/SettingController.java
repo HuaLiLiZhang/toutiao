@@ -2,6 +2,7 @@ package com.news.toutiao.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -14,6 +15,6 @@ public class SettingController {
     @ResponseBody
     public String setting()
     {
-        return "Setting ok";
+        return "Setting Success!!!";
     }
 }
