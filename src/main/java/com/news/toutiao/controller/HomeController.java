@@ -41,7 +41,7 @@ public class HomeController {
         }
         return vos;
     }
-    @RequestMapping(path={"/","index"},method={RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path={"/","/index"},method={RequestMethod.GET,RequestMethod.POST})
     public String index(Model model)
     {
         model.addAttribute("vos",getNews(0,0,10));
