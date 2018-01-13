@@ -52,15 +52,52 @@ public class UserService {
         user.setPassword(TouTiaoUtil.MD5(password+user.getSalt()));
         userDAO.addUser(user);
         return  map;
+    }
+
+    public Map<String ,Object> login(String username, String password)
+    {
+        Map<String,Object> map=new HashMap<String,Object>();
+        if(StringUtils.isBlank(username))
+        {
+            map.put("msgname","用户名不能为空");
+            return  map;
+
+        }
+        if(StringUtils.isBlank(password))
+        {
+            map.put("msgpassword","密码不能为空");
+            return  map;
+        }
+
+        User user=userDAO.selectByName(username);
+        if(user==null)
+        {
+            map.put("msgname","用户名不存在");
+            return  map;
+        }
+
+        if(!TouTiaoUtil.MD5(password+user.getSalt()).equals(
+                user.getPassword()))
+        {
+            map.put("password","密码不正确");
+            return  map;
+        }
+        //add ticket present you have register
+
+
+
+        return  map;
 
         //登录功能
 
 
-}
+    }
 
     public User getUser(int id)
     {
         return userDAO.selectById(id);
     }
+
+
 
 }
