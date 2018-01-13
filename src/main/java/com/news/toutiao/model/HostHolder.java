@@ -6,6 +6,8 @@ package com.news.toutiao.model;
 public class HostHolder {
     private static ThreadLocal<User> users=new ThreadLocal<User>();
     //线程本地变量,每条线程都存入自己的User内容
+
+    //1.存储这次访问中，用户是谁。
     //maybe the questioin
     public User getUser()
     {

@@ -2,6 +2,7 @@ package com.news.toutiao.interceptor;
 
 import com.news.toutiao.dao.LoginTicketDAO;
 import com.news.toutiao.dao.UserDAO;
+import com.news.toutiao.model.HostHolder;
 import com.news.toutiao.model.LoginTicket;
 import com.news.toutiao.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,16 @@ import java.util.Date;
  */
 @Component
 public class PassportInterceptor implements HandlerInterceptor{
+    //2.做一个拦截器，在每次访问之前，拦截器插入进来，确定用户是否存在。
     //认证用户是否已经登录
     @Autowired
     private LoginTicketDAO loginTicketDAO;
 
     @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    private HostHolder hostHolder;
 
 
 
@@ -52,19 +57,26 @@ public class PassportInterceptor implements HandlerInterceptor{
             }
 
             User user=userDAO.selectById(loginTicket.getUserId());
+            hostHolder.setUser(user);
             //httpServletRequest.setAttribute();
 
         }
-        return false;
+        return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+        if(modelAndView!=null&&hostHolder.getUser()!=null)
+        {
+            modelAndView.addObject("user",hostHolder.getUser());
+            //后端代码和前端交互的地方。
+        }
 
     }
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+        hostHolder.clear();
 
     }
 }
