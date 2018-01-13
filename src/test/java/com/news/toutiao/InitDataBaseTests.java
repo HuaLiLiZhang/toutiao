@@ -67,14 +67,26 @@ public class InitDataBaseTests {
 			ticket.setTicket(String.format("TICKET%d",i+1));
 			loginTicketDAO.addTicket(ticket);
 
+			loginTicketDAO.updateStatus(ticket.getTicket(),2);
+
 
 
 		}
-
+		//public class Assert extends java.lang.Object断言
+		//void assertEquals(boolean expected, boolean actual)
+		//检查两个变量或者等式是否平衡
 		Assert.assertEquals("newpassword",userDAO.selectById(1).getPassword());
 		userDAO.deleteById(1);
+		//void assertNotNull(Object object)
+		//检查对象不为空
+		//void assertNull(Object object)
+		//检查对象为空
 		Assert.assertNull(userDAO.selectById(1));
+		//Assert.assertNotNull(userDAO.selectById(1));
 
+
+		Assert.assertEquals(1,loginTicketDAO.selectByTicket("TICKET1").getUserId());
+		Assert.assertEquals(2,loginTicketDAO.selectByTicket("TICKET1").getStatus());
 
 
 	}

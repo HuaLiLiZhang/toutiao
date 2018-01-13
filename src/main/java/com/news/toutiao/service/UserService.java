@@ -1,24 +1,33 @@
 package com.news.toutiao.service;
 
+import com.news.toutiao.controller.IndexController;
+import com.news.toutiao.dao.LoginTicketDAO;
 import com.news.toutiao.dao.UserDAO;
+import com.news.toutiao.model.LoginTicket;
 import com.news.toutiao.model.User;
 import com.news.toutiao.util.TouTiaoUtil;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by huali on 2018/1/8.
  */
 @Service
 public class UserService {
+    private static final Logger logger= LoggerFactory.getLogger(IndexController.class);
+
     @Autowired
-    public UserDAO userDAO;
+    private UserDAO userDAO;
+
+    @Autowired
+    private LoginTicketDAO loginTicketDAO;
+
+
 
     public Map<String ,Object> register(String username, String password)
     {
@@ -51,7 +60,12 @@ public class UserService {
         user.setHeadUrl(String.format("http://images.nowcoder.com/head/%dt.png", new Random().nextInt(1000)));
         user.setPassword(TouTiaoUtil.MD5(password+user.getSalt()));
         userDAO.addUser(user);
-        return  map;
+
+        String ticket = addLoginTicket(user.getId());
+
+        map.put("ticket", ticket);
+        return map;
+
     }
 
     public Map<String ,Object> login(String username, String password)
@@ -86,9 +100,28 @@ public class UserService {
 
 
 
+
+        String ticket=addLoginTicket(user.getId());
+        map.put("ticket",ticket);
         return  map;
 
         //登录功能
+
+
+    }
+
+    private String addLoginTicket(int userId)
+    {
+        LoginTicket ticket=new LoginTicket();
+        ticket.setUserId(userId);
+        Date date =new Date();
+        date.setTime(date.getTime()+1000*3600*24);
+        ticket.setExpired(date);
+        ticket.setStatus(0);
+        ticket.setTicket(UUID.randomUUID().toString().replaceAll("-",""));
+        loginTicketDAO.addTicket(ticket);
+        return ticket.getTicket();
+
 
 
     }
