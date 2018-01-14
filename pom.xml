@@ -139,6 +139,14 @@
 			<version>1.2.13</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>1.3.5.RELEASE</version>
+			<!--this dependency can update the web after we alter the code ,but we do not
+			run again -->
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
