@@ -131,6 +131,11 @@ public class UserService {
         return userDAO.selectById(id);
     }
 
+    public void logout(String ticket)
+    {
+        loginTicketDAO.updateStatus(ticket,1);
+    }
+
 
 
 }

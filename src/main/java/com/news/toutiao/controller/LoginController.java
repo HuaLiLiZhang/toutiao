@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import sun.security.krb5.internal.Ticket;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -88,6 +89,15 @@ public class LoginController {
             logger.error("注册异常"+e.getMessage());
             return TouTiaoUtil.getJSONString(1,"注册异常");
         }
+    }
+
+
+    @RequestMapping(path={"/logout"},method={RequestMethod.GET,RequestMethod.POST})
+
+    public String logout(@CookieValue("ticket") String ticket)
+    {
+        userService.logout(ticket);
+        return "redirect:/";
     }
 
 
