@@ -1,8 +1,11 @@
 package com.news.toutiao.model;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by huali on 2018/1/13.
  */
+@Component
 public class HostHolder {
     private static ThreadLocal<User> users=new ThreadLocal<User>();
     //线程本地变量,每条线程都存入自己的User内容

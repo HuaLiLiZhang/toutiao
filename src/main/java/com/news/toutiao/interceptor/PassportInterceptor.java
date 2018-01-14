@@ -58,7 +58,6 @@ public class PassportInterceptor implements HandlerInterceptor{
 
             User user=userDAO.selectById(loginTicket.getUserId());
             hostHolder.setUser(user);
-            //httpServletRequest.setAttribute();
 
         }
         return true;

@@ -1,5 +1,6 @@
 package com.news.toutiao.controller;
 
+import com.news.toutiao.model.HostHolder;
 import com.news.toutiao.model.News;
 import com.news.toutiao.model.ViewObject;
 import com.news.toutiao.service.NewsService;
@@ -25,6 +26,9 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    HostHolder hostHolder;
 
 
     private List<ViewObject> getNews(int userId, int offset, int limit)
