@@ -27,29 +27,34 @@ public class NewsService {
         return newsDAO.selectByUserIdAndOffset(userId,offset,limit);
     }
 
-
-    public String saveImage(MultipartFile file ) throws IOException
-    {
-        int doPos=file.getOriginalFilename().lastIndexOf(".");
-        if(doPos<0)
-        {
-            return null;
-        }
-        String fileExt=file.getOriginalFilename().substring(doPos+1).toLowerCase();
-        if(TouTiaoUtil.isFileAllowed(fileExt))
-        {
-            return null;
-        }
-
-        String fileName= UUID.randomUUID().toString().replaceAll("-","")+"."+fileExt;
-        Files.copy(file.getInputStream(),new File(TouTiaoUtil.IMAGE_DIR+fileName).toPath(),
-                StandardCopyOption.REPLACE_EXISTING);
-
-
-        return TouTiaoUtil.TOUTIAO_DOMAIN + "image?name="+fileName;
-
-
-
+    public int addNews(News news) {
+        newsDAO.addNews(news);
+        return news.getId();
     }
+
+    public News getById(int newsId) {
+        return newsDAO.getById(newsId);
+    }
+
+    public String saveImage(MultipartFile file) throws IOException {
+        int dotPos = file.getOriginalFilename().lastIndexOf(".");
+        if (dotPos < 0) {
+            return null;
+        }
+        String fileExt = file.getOriginalFilename().substring(dotPos + 1).toLowerCase();
+        if (!TouTiaoUtil.isFileAllowed(fileExt)) {
+            return null;
+        }
+
+        String fileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + fileExt;
+        Files.copy(file.getInputStream(), new File(TouTiaoUtil.IMAGE_DIR + fileName).toPath(),
+                StandardCopyOption.REPLACE_EXISTING);
+        return TouTiaoUtil.TOUTIAO_DOMAIN + "image?name=" + fileName;
+    }
+
+    public int updateCommentCount(int id, int count) {
+        return newsDAO.updateCommentCount(id, count);
+    }
+
 
 }

@@ -69,7 +69,7 @@ public class LoginController {
                       @RequestParam(value="rember",defaultValue = "0") int remember)
     {
         try{
-            Map<String,Object> map=userService.register(username,password);
+            Map<String,Object> map=userService.login(username,password);
             if (map.containsKey("ticket")) {
                 Cookie cookie=new Cookie("ticket",map.get("ticket").toString());
                 cookie.setPath("/");
@@ -77,7 +77,7 @@ public class LoginController {
                 {
                     cookie.setMaxAge(3600*24*5);
                 }
-                return TouTiaoUtil.getJSONString(0, "注册成功");//map为空代表注册成功，因为加到User中了
+                return TouTiaoUtil.getJSONString(0, "登陆成功");//map为空代表注册成功，因为加到User中了
             }else {
                 return TouTiaoUtil.getJSONString(1, map);
             }
@@ -86,8 +86,8 @@ public class LoginController {
 
         catch (Exception e)
         {
-            logger.error("注册异常"+e.getMessage());
-            return TouTiaoUtil.getJSONString(1,"注册异常");
+            logger.error("登录异常"+e.getMessage());
+            return TouTiaoUtil.getJSONString(1,"登录异常");
         }
     }
 

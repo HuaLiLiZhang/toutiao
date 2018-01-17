@@ -22,23 +22,19 @@ public class NewsController {
     @Autowired
     NewsService newsService;
 
-    @RequestMapping(path={"/uploadImage/"},method = {RequestMethod.POST})
+    @RequestMapping(path = {"/uploadImage/"}, method = {RequestMethod.POST})
     @ResponseBody
-    public String uploadImage(@RequestParam("file")MultipartFile file)
-    {
+    public String uploadImage(@RequestParam("file") MultipartFile file) {
         try {
             String fileUrl = newsService.saveImage(file);
-            if (fileUrl==null)
-            {
-                return  TouTiaoUtil.getJSONString(1,"上传图片失败");
+            //String fileUrl = qiniuService.saveImage(file);
+            if (fileUrl == null) {
+                return TouTiaoUtil.getJSONString(1, "上传图片失败");
             }
-            return TouTiaoUtil.getJSONString(0,fileUrl);
-
-        }catch (Exception e)
-        {
-            logger.error("上传图片失败"+e.getMessage());
-            return TouTiaoUtil.getJSONString(1,"上传失败");
-
+            return TouTiaoUtil.getJSONString(0, fileUrl);
+        } catch (Exception e) {
+            logger.error("上传图片失败" + e.getMessage());
+            return TouTiaoUtil.getJSONString(1, "上传失败");
         }
     }
 
