@@ -1,6 +1,5 @@
 package com.news.toutiao.util;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.news.toutiao.controller.IndexController;
 import org.slf4j.Logger;
@@ -12,9 +11,27 @@ import java.util.Map;
 /**
  * Created by huali on 2018/1/12.
  */
+
 public class TouTiaoUtil {
     private static final Logger logger= LoggerFactory.getLogger(IndexController.class);
 
+    public static String TOUTIAO_DOMAIN = "http://127.0.0.1:8080/";
+    public static String IMAGE_DIR="e:/JavaBook/MyprojectTouTiao/upload/";
+    public static String[] IMAGE_FILE_EXT=new String[]{"png","bmp","jpg","jpeg"};
+
+
+    public static boolean isFileAllowed(String fileExt)
+    {
+        for(String ext:IMAGE_FILE_EXT)
+        {
+            if(ext.equals(fileExt))
+            {
+                return true;
+            }
+        }
+        return false;
+
+    }
 
     public static String getJSONString(int code)
     {
