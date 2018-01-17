@@ -4,13 +4,14 @@ import com.news.toutiao.dao.MessageDAO;
 import com.news.toutiao.model.Message;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by huali on 2018/1/17.
  */
-@Mapper
+@Service
 public class MessageService {
     @Autowired
     private MessageDAO messageDAO;
