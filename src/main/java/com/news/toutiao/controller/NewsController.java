@@ -27,7 +27,6 @@ public class NewsController {
     public String uploadImage(@RequestParam("file") MultipartFile file) {
         try {
             String fileUrl = newsService.saveImage(file);
-            //String fileUrl = qiniuService.saveImage(file);
             if (fileUrl == null) {
                 return TouTiaoUtil.getJSONString(1, "上传图片失败");
             }
