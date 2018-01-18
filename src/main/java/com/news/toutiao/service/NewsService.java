@@ -26,15 +26,15 @@ public class NewsService {
     {
         return newsDAO.selectByUserIdAndOffset(userId,offset,limit);
     }
-
-    public int addNews(News news) {
-        newsDAO.addNews(news);
-        return news.getId();
-    }
-
-    public News getById(int newsId) {
-        return newsDAO.getById(newsId);
-    }
+    //
+    //public int addNews(News news) {
+    //    newsDAO.addNews(news);
+    //    return news.getId();
+    //}
+    //
+    //public News getById(int newsId) {
+    //    return newsDAO.getById(newsId);
+    //}
 
     public String saveImage(MultipartFile file) throws IOException {
         int dotPos = file.getOriginalFilename().lastIndexOf(".");
@@ -52,9 +52,9 @@ public class NewsService {
         return TouTiaoUtil.TOUTIAO_DOMAIN + "image?name=" + fileName;
     }
 
-    public int updateCommentCount(int id, int count) {
-        return newsDAO.updateCommentCount(id, count);
-    }
+    //public int updateCommentCount(int id, int count) {
+    //    return newsDAO.updateCommentCount(id, count);
+    //}
 
 
 }
