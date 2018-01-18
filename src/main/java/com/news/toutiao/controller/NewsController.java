@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+
 /**
  * Created by huali on 2018/1/17.
  */
@@ -26,6 +28,7 @@ public class NewsController {
     @ResponseBody
     public String uploadImage(@RequestParam("file") MultipartFile file) {
         try {
+            //file.transferTo();
             String fileUrl = newsService.saveImage(file);
             if (fileUrl == null) {
                 return TouTiaoUtil.getJSONString(1, "上传图片失败");
