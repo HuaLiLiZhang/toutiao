@@ -26,12 +26,12 @@ public class NewsService {
     {
         return newsDAO.selectByUserIdAndOffset(userId,offset,limit);
     }
-    //
-    //public int addNews(News news) {
-    //    newsDAO.addNews(news);
-    //    return news.getId();
-    //}
-    //
+
+    public int addNews(News news)
+    {
+        newsDAO.addNews(news);
+        return  news.getId();
+    }
     //public News getById(int newsId) {
     //    return newsDAO.getById(newsId);
     //}
