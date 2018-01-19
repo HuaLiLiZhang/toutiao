@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,18 +51,22 @@ public class NewsController {
 
     @RequestMapping(path = {"/uploadImage/"}, method = {RequestMethod.POST})
     @ResponseBody
-    public String uploadImage(@RequestParam("file") MultipartFile file) {
-        try {
-            //file.transferTo();
-            String fileUrl = newsService.saveImage(file);
-            if (fileUrl == null) {
-                return TouTiaoUtil.getJSONString(1, "上传图片失败");
+    public String uploadImage(@RequestParam(value="file") MultipartFile file)
+    {
+                              //HttpServletRequest request {
+        //if(request instanceof MultipartHttpServletRequest) {}
+            try {
+                //file.transferTo();
+                String fileUrl = newsService.saveImage(file);
+                if (fileUrl == null) {
+                    return TouTiaoUtil.getJSONString(1, "上传图片失败");
+                }
+                return TouTiaoUtil.getJSONString(0, fileUrl);
+            } catch (Exception e) {
+                logger.error("上传图片失败" + e.getMessage());
+                return TouTiaoUtil.getJSONString(1, "上传失败");
             }
-            return TouTiaoUtil.getJSONString(0, fileUrl);
-        } catch (Exception e) {
-            logger.error("上传图片失败" + e.getMessage());
-            return TouTiaoUtil.getJSONString(1, "上传失败");
-        }
+
     }
 
 }
