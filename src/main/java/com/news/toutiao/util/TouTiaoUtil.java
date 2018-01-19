@@ -15,6 +15,7 @@ import java.util.Map;
 public class TouTiaoUtil {
     private static final Logger logger= LoggerFactory.getLogger(IndexController.class);
 
+    public static String QINIU_DOMAIN_PREFIX = "http://p2qp1rlg3.bkt.clouddn.com";
     public static String TOUTIAO_DOMAIN = "http://127.0.0.1:8080/";
     public static String IMAGE_DIR="e:/JavaBook/MyprojectTouTiao/upload/";
     //写入图片目录

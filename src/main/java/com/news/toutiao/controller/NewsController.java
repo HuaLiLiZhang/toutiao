@@ -1,6 +1,7 @@
 package com.news.toutiao.controller;
 
 import com.news.toutiao.service.NewsService;
+import com.news.toutiao.service.QiniuService;
 import com.news.toutiao.util.TouTiaoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,10 @@ public class NewsController {
 
     @Autowired
     NewsService newsService;
+
+    @Autowired
+    QiniuService qiniuService;
+
 //展示图片
     @RequestMapping(path={"/image"},method = RequestMethod.GET)
     @ResponseBody
@@ -49,6 +54,8 @@ public class NewsController {
 
     }
 
+    //上传图片
+
     @RequestMapping(path = {"/uploadImage/"}, method = {RequestMethod.POST})
     @ResponseBody
     public String uploadImage(@RequestParam(value="file") MultipartFile file)
@@ -57,7 +64,8 @@ public class NewsController {
         //if(request instanceof MultipartHttpServletRequest) {}
             try {
                 //file.transferTo();
-                String fileUrl = newsService.saveImage(file);
+                //String fileUrl = newsService.saveImage(file);
+                String fileUrl=qiniuService.saveImage(file);
                 if (fileUrl == null) {
                     return TouTiaoUtil.getJSONString(1, "上传图片失败");
                 }
