@@ -31,7 +31,7 @@ public class QiniuService {
     //创建上传对象
     UploadManager uploadManager = new UploadManager();
 
-    //private static String QINIU_IMAGE_DOMAIN = "http://7xsetu.com1.z0.glb.clouddn.com/";
+    //private static String QINIU_IMAGE_DOMAIN = "http://p2qp1rlg3.bkt.clouddn.com/";
 
     //简单上传，使用默认策略，只需要设置上传的空间名就可以了
     public String getUpToken() {
