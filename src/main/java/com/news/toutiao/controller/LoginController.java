@@ -66,7 +66,8 @@ public class LoginController {
     @ResponseBody
     public String login(Model model, @RequestParam("username") String username,
                       @RequestParam("password") String password,
-                      @RequestParam(value="rember",defaultValue = "0") int remember)
+                      @RequestParam(value="rember",defaultValue = "0") int remember,
+                        HttpServletResponse response)
     {
         try{
             Map<String,Object> map=userService.login(username,password);
@@ -77,6 +78,7 @@ public class LoginController {
                 {
                     cookie.setMaxAge(3600*24*5);
                 }
+                response.addCookie(cookie);
                 return TouTiaoUtil.getJSONString(0, "登陆成功");//map为空代表注册成功，因为加到User中了
             }else {
                 return TouTiaoUtil.getJSONString(1, map);
