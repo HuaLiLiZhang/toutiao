@@ -37,6 +37,13 @@ public class NewsController {
     @Autowired
     HostHolder hostHolder;
 
+    @RequestMapping(path={"/news/{newsId}"},method = {RequestMethod.GET})
+    public String newsDetail(@PathVariable("newsId") int newsId)
+    {
+        return "detail";
+    }
+
+
 
 //展示图片
     @RequestMapping(path={"/image"},method = RequestMethod.GET)
