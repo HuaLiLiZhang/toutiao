@@ -32,9 +32,9 @@ public class NewsService {
         newsDAO.addNews(news);
         return  news.getId();
     }
-    //public News getById(int newsId) {
-    //    return newsDAO.getById(newsId);
-    //}
+    public News getById(int newsId) {
+        return newsDAO.getById(newsId);
+    }
 
     public String saveImage(MultipartFile file) throws IOException {
         int dotPos = file.getOriginalFilename().lastIndexOf(".");

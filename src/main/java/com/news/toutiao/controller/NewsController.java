@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,8 +39,13 @@ public class NewsController {
     HostHolder hostHolder;
 
     @RequestMapping(path={"/news/{newsId}"},method = {RequestMethod.GET})
-    public String newsDetail(@PathVariable("newsId") int newsId)
+    public String newsDetail(@PathVariable("newsId") int newsId, Model model)
     {
+        News news = newsService.getById(newsId);
+        if(news!=null) {
+            //评论获取
+        }
+        model.addAttribute("news",news);
         return "detail";
     }
 
