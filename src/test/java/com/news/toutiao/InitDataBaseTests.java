@@ -1,11 +1,11 @@
 package com.news.toutiao;
 
+import com.news.toutiao.dao.CommentDAO;
 import com.news.toutiao.dao.LoginTicketDAO;
 import com.news.toutiao.dao.NewsDAO;
-import com.news.toutiao.model.LoginTicket;
-import com.news.toutiao.model.News;
-import com.news.toutiao.model.User;
+import com.news.toutiao.model.*;
 import com.news.toutiao.dao.UserDAO;
+import com.news.toutiao.service.CommentService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +29,13 @@ public class InitDataBaseTests {
 
 	@Autowired
 	LoginTicketDAO loginTicketDAO;
+
+	@Autowired
+	CommentService commentService;
+
+	@Autowired
+	CommentDAO commentDAO;
+
 
 	@Test
 	public void initData() {
@@ -54,6 +61,20 @@ public class InitDataBaseTests {
 			news.setLink(String.format("http://www.nowcoder.com/%d.html",i));
 
 			newsDAO.addNews(news);
+
+			for(int j=0;j<3;j++)  //每条资讯加三条评论
+			{
+				Comment comment=new Comment();
+				comment.setUserId(i+1);
+				comment.setEntityId(news.getId());
+				comment.setEntityType(EntityType.ENTITY_NEWS);
+				comment.setStatus(0);
+				comment.setCreateDate(new Date());
+				comment.setContent("Comment "+String.valueOf(j));
+				commentDAO.addComment(comment);
+
+
+			}
 
 
 
@@ -90,5 +111,8 @@ public class InitDataBaseTests {
 
 
 	}
+
+
+
 
 }
