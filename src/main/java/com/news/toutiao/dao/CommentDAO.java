@@ -25,12 +25,12 @@ public interface CommentDAO {
 
     @Select({"select",SELECT_FILEDS,"from",TABLE_NAME,
             "where entity_id=#{entityId} and entity_type=#{entityType} order by id desc" })
-    List<Comment> selectByEntity(@Param("entityID") int entityId,
+    List<Comment> selectByEntity(@Param("entityId") int entityId,
                                  @Param("entityType") int entityType);
 
     @Select({"select count(id) from",TABLE_NAME,
             "where entity_id=#{entityId} and entity_type=#{entityType}"})
-    int getCommentCount(@Param("entityID") int entityId,
+    int getCommentCount(@Param("entityId") int entityId,
                                  @Param("entityType") int entityType);
 
 }

@@ -1,7 +1,7 @@
 package com.news.toutiao.controller;
 
-import com.news.toutiao.model.HostHolder;
-import com.news.toutiao.model.News;
+import com.news.toutiao.model.*;
+import com.news.toutiao.service.CommentService;
 import com.news.toutiao.service.NewsService;
 import com.news.toutiao.service.QiniuService;
 import com.news.toutiao.service.UserService;
@@ -21,7 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by huali on 2018/1/17.
@@ -42,12 +44,31 @@ public class NewsController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CommentService commentService;
+
+
+
+
+
+
     @RequestMapping(path={"/news/{newsId}"},method = {RequestMethod.GET})
     public String newsDetail(@PathVariable("newsId") int newsId, Model model)
     {
         News news = newsService.getById(newsId);
         if(news!=null) {
             //评论获取
+            List<Comment> comments=commentService.getCommentsByEntity(news.getId(), EntityType.ENTITY_NEWS);
+            List<ViewObject> commentVOs=new ArrayList<ViewObject>();
+            for(Comment comment  :comments)
+            {
+                ViewObject vo=new ViewObject();
+                vo.set("comment",comment);
+                vo.set("user",userService.getUser(comment.getUserId()));
+                commentVOs.add(vo);
+
+            }
+            model.addAttribute("comment",commentVOs);
         }
         model.addAttribute("news",news);
         model.addAttribute("owner", userService.getUser(news.getUserId()));

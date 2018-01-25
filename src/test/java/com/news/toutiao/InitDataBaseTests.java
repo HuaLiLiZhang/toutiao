@@ -110,6 +110,8 @@ public class InitDataBaseTests {
 		Assert.assertEquals(2,loginTicketDAO.selectByTicket("TICKET1").getStatus());
 
 
+		Assert.assertNotNull(commentDAO.selectByEntity(1,EntityType.ENTITY_NEWS).get(0));
+
 	}
 
 
