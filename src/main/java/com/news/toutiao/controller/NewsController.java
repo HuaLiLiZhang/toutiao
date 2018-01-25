@@ -68,7 +68,7 @@ public class NewsController {
                 commentVOs.add(vo);
 
             }
-            model.addAttribute("comment",commentVOs);
+            model.addAttribute("comments",commentVOs);
         }
         model.addAttribute("news",news);
         model.addAttribute("owner", userService.getUser(news.getUserId()));
