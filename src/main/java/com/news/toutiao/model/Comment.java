@@ -14,6 +14,16 @@ public class Comment {
     private Date createdDate;
     private int status;
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+
+
     public int getId() {
         return id;
     }
@@ -52,14 +62,6 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Date getCreateDate() {
-        return createdDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createdDate = createDate;
     }
 
     public int getStatus() {

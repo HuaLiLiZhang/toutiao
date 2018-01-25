@@ -69,7 +69,7 @@ public class InitDataBaseTests {
 				comment.setEntityId(news.getId());
 				comment.setEntityType(EntityType.ENTITY_NEWS);
 				comment.setStatus(0);
-				comment.setCreateDate(new Date());
+				comment.setCreatedDate(new Date());
 				comment.setContent("Comment "+String.valueOf(j));
 				commentDAO.addComment(comment);
 
