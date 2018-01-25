@@ -3,7 +3,7 @@ package com.news.toutiao.model;
 import java.util.Date;
 
 /**
- * Created by huali on 2018/1/17.
+ * Created by huali on 2018/1/25.
  */
 public class Comment {
     private int id;
@@ -11,7 +11,7 @@ public class Comment {
     private int entityId;
     private int entityType;
     private String content;
-    private Date createdDate;
+    private Date createDate;
     private int status;
 
     public int getId() {
@@ -54,12 +54,12 @@ public class Comment {
         this.content = content;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public int getStatus() {
