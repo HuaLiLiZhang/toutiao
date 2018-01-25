@@ -76,6 +76,34 @@ public class NewsController {
     }
 
 
+    @RequestMapping(path = {"/addComment"},method = {RequestMethod.POST})
+    public String addComment(@RequestParam("newsId") int newsId,
+                             @RequestParam("content") String content)
+    {
+        try {
+            Comment comment=new Comment();
+            comment.setUserId(hostHolder.getUser().getId());
+            comment.setContent(content);
+            comment.setEntityId(newsId);
+            comment.setEntityType(EntityType.ENTITY_NEWS);
+            comment.setCreatedDate(new Date());
+            comment.setStatus(0);
+
+            commentService.addComment(comment);
+            //更新news里面的评论数量
+            int count=commentService.getCommentCount(comment.getEntityId(),comment.getEntityType());
+            newsService.updateCommentCount(comment.getEntityId(),count);
+
+            //怎么异步化
+
+
+        }catch (Exception e)
+        {
+            logger.error("增加评论失败"+e.getMessage());
+        }
+        return "redirect:/news/"+String.valueOf(newsId);
+    }
+
 
 //展示图片
     @RequestMapping(path={"/image"},method = RequestMethod.GET)

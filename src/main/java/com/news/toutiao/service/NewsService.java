@@ -1,5 +1,6 @@
 package com.news.toutiao.service;
 
+import com.news.toutiao.dao.CommentDAO;
 import com.news.toutiao.dao.NewsDAO;
 import com.news.toutiao.model.News;
 import com.news.toutiao.util.TouTiaoUtil;
@@ -52,9 +53,10 @@ public class NewsService {
         return TouTiaoUtil.TOUTIAO_DOMAIN + "image?name=" + fileName;
     }
 
-    //public int updateCommentCount(int id, int count) {
-    //    return newsDAO.updateCommentCount(id, count);
-    //}
+    public int updateCommentCount(int id,int count)
+    {
+        return newsDAO.updateCommentCount(id,count);
+    }
 
 
 }
