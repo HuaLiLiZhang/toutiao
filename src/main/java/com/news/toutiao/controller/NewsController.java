@@ -4,6 +4,7 @@ import com.news.toutiao.model.HostHolder;
 import com.news.toutiao.model.News;
 import com.news.toutiao.service.NewsService;
 import com.news.toutiao.service.QiniuService;
+import com.news.toutiao.service.UserService;
 import com.news.toutiao.util.TouTiaoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,9 @@ public class NewsController {
     @Autowired
     HostHolder hostHolder;
 
+    @Autowired
+    UserService userService;
+
     @RequestMapping(path={"/news/{newsId}"},method = {RequestMethod.GET})
     public String newsDetail(@PathVariable("newsId") int newsId, Model model)
     {
@@ -46,6 +50,7 @@ public class NewsController {
             //评论获取
         }
         model.addAttribute("news",news);
+        model.addAttribute("owner", userService.getUser(news.getUserId()));
         return "detail";
     }
 
