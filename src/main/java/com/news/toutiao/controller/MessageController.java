@@ -1,12 +1,13 @@
 package com.news.toutiao.controller;
 
-import com.news.toutiao.dao.MessageDAO;
 import com.news.toutiao.model.Message;
 import com.news.toutiao.service.MessageService;
 import com.news.toutiao.util.TouTiaoUtil;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,12 @@ public class MessageController {
 
     @Autowired
     MessageService messageService;
+
+    @RequestMapping(path = {"/msg/detail"},method = RequestMethod.POST)
+    public String conversationDetail(Model model, @Param("conversationId") String conservationId)
+    {
+        return "letterDetail.html";
+    }
 
     @RequestMapping(path = {"/msg/addMessage"},method = RequestMethod.POST)
     @ResponseBody

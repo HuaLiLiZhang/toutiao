@@ -5,6 +5,8 @@ import com.news.toutiao.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by huali on 2018/1/26.
  */
@@ -15,5 +17,10 @@ public class MessageService {
     public int addMessage(Message message)
     {
         return messageDAO.addMessage(message);
+    }
+
+    public List<Message> getConservationDetail(String conservationId,int offset,int limit)
+    {
+        return messageDAO.getConservationDetail(conservationId,offset,limit);
     }
 }
