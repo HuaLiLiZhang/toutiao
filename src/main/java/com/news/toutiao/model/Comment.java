@@ -6,6 +6,7 @@ import java.util.Date;
  * Created by huali on 2018/1/25.
  */
 public class Comment {
+    //分析业务属性字段，然后和数据库相匹配
     private int id;
     private int userId;
     private int entityId;

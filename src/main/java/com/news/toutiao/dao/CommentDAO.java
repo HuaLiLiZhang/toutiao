@@ -14,6 +14,8 @@ import java.util.List;
 @Mapper
 
 public interface CommentDAO {
+    //DAO层数据读取或者写入，列表读取
+
     String TABLE_NAME="comment";
     String INSERT_FIELDS="user_id,content,created_date,entity_id,entity_type,status";
     String SELECT_FILEDS="id,"+INSERT_FIELDS;
@@ -22,6 +24,12 @@ public interface CommentDAO {
     ") values (#{userId},#{content},#{createdDate},#{entityId},#{entityType},#{status})"})
     int addComment(Comment comment);
 
+
+    //删除评论。要写注解
+    @Update({"update",TABLE_NAME,"set status=#{status} where entity_id=#{entityId} and entity_type=#{entityType}"})
+    void updateStatus(@Param("entityId") int entityId,
+                      @Param("entityType") int entityType,
+                      @Param("status") int status);
 
     @Select({"select",SELECT_FILEDS,"from",TABLE_NAME,
             "where entity_id=#{entityId} and entity_type=#{entityType} order by id desc" })

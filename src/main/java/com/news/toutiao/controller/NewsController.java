@@ -81,6 +81,7 @@ public class NewsController {
                              @RequestParam("content") String content)
     {
         try {
+            //过滤content
             Comment comment=new Comment();
             comment.setUserId(hostHolder.getUser().getId());
             comment.setContent(content);
@@ -95,6 +96,8 @@ public class NewsController {
             newsService.updateCommentCount(comment.getEntityId(),count);
 
             //怎么异步化
+
+            //过滤特殊字符，课后作业，发布敏感词需要过滤
 
 
         }catch (Exception e)
