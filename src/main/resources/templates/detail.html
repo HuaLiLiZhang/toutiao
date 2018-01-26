@@ -64,6 +64,10 @@
                 #if($user)
                 <span>评论 ($!{news.commentCount})</span>
                 <form method="post" action="/addComment">
+                    <input name="newsId" type="hidden" value="$!{news.id}">
+
+
+
                   <div class="form-group text required comment_content">
                       <label class="text required sr-only">
                           <abbr title="required">*</abbr> 评论

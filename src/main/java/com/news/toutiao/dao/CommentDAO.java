@@ -32,5 +32,5 @@ public interface CommentDAO {
             "where entity_id=#{entityId} and entity_type=#{entityType}"})
     int getCommentCount(@Param("entityId") int entityId,
                                  @Param("entityType") int entityType);
-
+//增加分页功能，就要加offset和 limit
 }
