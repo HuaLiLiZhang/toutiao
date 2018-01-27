@@ -1,7 +1,10 @@
 package com.news.toutiao.controller;
 
 import com.news.toutiao.model.Message;
+import com.news.toutiao.model.User;
+import com.news.toutiao.model.ViewObject;
 import com.news.toutiao.service.MessageService;
+import com.news.toutiao.service.UserService;
 import com.news.toutiao.util.TouTiaoUtil;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.LoggerFactory;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by huali on 2018/1/26.
@@ -26,10 +31,36 @@ public class MessageController {
     @Autowired
     MessageService messageService;
 
-    @RequestMapping(path = {"/msg/detail"},method = RequestMethod.POST)
-    public String conversationDetail(Model model, @Param("conversationId") String conservationId)
+    @Autowired
+    UserService userService;
+
+    @RequestMapping(path = {"/msg/detail"},method = {RequestMethod.GET})
+    public String conversationDetail(Model model, @Param("conversationId") String conversationId)
     {
-        return "letterDetail.html";
+        try {
+            List<Message> conversationList = messageService.getConservationDetail(conversationId, 0, 10);
+            List<ViewObject> messages=new ArrayList<>();
+            for (Message msg:conversationList)
+            {
+                ViewObject vo=new ViewObject();
+                vo.set("message",msg);
+                User user=userService.getUser(msg.getFromId());
+                if(user==null)
+                {
+                    continue;
+                }
+                vo.set("headUrl",user.getHeadUrl());
+                vo.set("userId",user.getId());
+                messages.add(vo);
+
+            }
+            model.addAttribute("message",messages);
+
+        }catch (Exception e )
+        {
+            logger.error("获取详情消息失败",e.getMessage());
+        }
+        return "letterDetail";
     }
 
     @RequestMapping(path = {"/msg/addMessage"},method = RequestMethod.POST)

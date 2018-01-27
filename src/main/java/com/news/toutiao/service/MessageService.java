@@ -19,8 +19,9 @@ public class MessageService {
         return messageDAO.addMessage(message);
     }
 
-    public List<Message> getConservationDetail(String conservationId,int offset,int limit)
+    public List<Message> getConservationDetail(String conversationId,int offset,int limit)
     {
-        return messageDAO.getConservationDetail(conservationId,offset,limit);
+        System.out.println(messageDAO.getConservationDetail(conversationId,offset,limit));
+        return messageDAO.getConservationDetail(conversationId,offset,limit);
     }
 }
