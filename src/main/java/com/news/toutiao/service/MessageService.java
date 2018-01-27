@@ -24,4 +24,11 @@ public class MessageService {
         System.out.println(messageDAO.getConservationDetail(conversationId,offset,limit));
         return messageDAO.getConservationDetail(conversationId,offset,limit);
     }
+
+
+    public List<Message> getConversationList(int userId,int offset,int limit)
+    {
+        return messageDAO.getConversationList(userId,offset,limit);
+    }
 }
+
