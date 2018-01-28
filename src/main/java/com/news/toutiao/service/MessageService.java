@@ -21,7 +21,7 @@ public class MessageService {
 
     public List<Message> getConservationDetail(String conversationId,int offset,int limit)
     {
-        System.out.println(messageDAO.getConservationDetail(conversationId,offset,limit));
+        //System.out.println(messageDAO.getConservationDetail(conversationId,offset,limit));
         return messageDAO.getConservationDetail(conversationId,offset,limit);
     }
 
@@ -29,6 +29,10 @@ public class MessageService {
     public List<Message> getConversationList(int userId,int offset,int limit)
     {
         return messageDAO.getConversationList(userId,offset,limit);
+    }
+    public int getConversationUnreadCount(int userId,String conversationId)
+    {
+        return messageDAO.getConversationUnreadCount(userId,conversationId);
     }
 }
 

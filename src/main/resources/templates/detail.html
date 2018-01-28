@@ -27,7 +27,7 @@
                   </div>
             <div class="user-info">
                 <div class="user-avatar">
-                    <a href="/user/$!{owner.id}"><img width="32" class="img-circle" src="$!{owner.headUrl}"></a>
+                    <a href="http://nowcoder.com/u/125701"><img width="32" class="img-circle" src="${owner.headUrl}"></a>
                 </div>
                 <!--
                 <div class="info">
@@ -64,10 +64,6 @@
                 #if($user)
                 <span>评论 ($!{news.commentCount})</span>
                 <form method="post" action="/addComment">
-                    <input name="newsId" type="hidden" value="$!{news.id}">
-
-
-
                   <div class="form-group text required comment_content">
                       <label class="text required sr-only">
                           <abbr title="required">*</abbr> 评论
@@ -89,7 +85,7 @@
             <div id="comments" class="comments">
                 #foreach($commentvo in $comments)
                 <div class="media">
-                    <a class="media-left" href="/user/$!{commentvo.user.id}">
+                    <a class="media-left" href="http://nowcoder.com/u/210176">
                         <img src="$!{commentvo.user.headUrl}">
                     </a>
                     <div class="media-body">
