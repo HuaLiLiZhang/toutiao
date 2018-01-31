@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.print.DocFlavor.STRING;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -176,6 +177,7 @@ public class IndexController {
     @ResponseBody
     public String error(Exception e)
     {
+        //Map<String,Object> a=new HashMap<>();
         return "error"+e.getMessage();
     }
 
