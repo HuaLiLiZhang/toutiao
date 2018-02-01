@@ -23,8 +23,14 @@ public class ToutiaoWebConfiguration extends WebMvcConfigurerAdapter{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(passportInterceptor);  //每次注册时，会回调一遍
+        // 注册自定义的拦截器passportInterceptor
         registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/setting*");  //每次注册时，会回调一遍
                                                                     //setting界面也设置跳转
+        //registry.addInterceptor(passportInterceptor)
+        //        .addPathPatterns("/api/*") //匹配要过滤的路径
+        //        .excludePathPatterns("/api/changePasswordByUser/*") //匹配不过滤的路径。密码还要修改呢，所以这个路径不能拦截
+        //        .excludePathPatterns("/api/passwordStateValid") //密码状态验证也不能拦截
+        //        .excludePathPatterns("/api/getManagerVersion");//版本信息同样不能拦截
 
         super.addInterceptors(registry);
     }
