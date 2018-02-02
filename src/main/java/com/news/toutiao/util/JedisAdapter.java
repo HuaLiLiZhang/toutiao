@@ -155,6 +155,7 @@ public class JedisAdapter {
         }
 
         //实现赞和踩的功能。！！！！！
+        //一般微博就是使用redis，数据量比较大。
 
 
 
