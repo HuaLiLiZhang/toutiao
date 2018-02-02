@@ -1,6 +1,5 @@
 package com.news.toutiao.util;
 
-import redis.clients.jedis.BinaryClient;
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
 import redis.clients.jedis.Jedis;
 
@@ -19,18 +18,18 @@ public class JedisAdapter {
 
 
         jedis.set("hello","world");  //设置的是以（key,value）类似存储的是Map
-        //print(1,jedis.get("hello"));
+        print(1,jedis.get("hello"));
         jedis.rename("hello","newhello");
-        //print(1,jedis.get("newhello"));
+        print(1,jedis.get("newhello"));
         jedis.setex("hello2",15,"world");//设置过期时间 15s
 
         //
         jedis.set("pv","100");
         jedis.incr("pv"); //增加1
-        //print(2,jedis.get("pv"));
+        print(2,jedis.get("pv"));
         jedis.incrBy("pv",5);
         jedis.incrBy("pv",7);
-        //print(2,jedis.get("pv"));
+        print(2,jedis.get("pv"));
 
         //高并发
 
@@ -42,7 +41,7 @@ public class JedisAdapter {
             jedis.lpush(listName,"a"+String.valueOf(i));
             //从左往右推10个，lpush
         }
-      /*  print(3,jedis.lrange(listName,0,12));
+        print(3,jedis.lrange(listName,0,12));
         //lrange是提取打印出来，lrange是可以打印从加到几的。
         print(4,jedis.llen(listName));  //获取listname的长度
         print(5,jedis.lpop(listName));  //弹出，从左往右弹出，类似于栈
@@ -54,7 +53,7 @@ public class JedisAdapter {
         print(9,jedis.linsert(listName, LIST_POSITION.BEFORE,"a4","aa"));
         //插入到前面即是左边，插入到后面即是右边。
         print(10,jedis.lrange(listName,0,12));
-        */
+
 
 
         String userKey="useradc";
@@ -88,6 +87,10 @@ public class JedisAdapter {
         }
         print(1,jedis.smembers(likeKey1));
         print(2,jedis.smembers(likeKey2));
+        print(3,jedis.sinter(likeKey1,likeKey2));
+        print(4,jedis.sunion(likeKey1,likeKey2));
+        print(5,jedis.sdiff(likeKey1,likeKey2));
+
 
 
 
