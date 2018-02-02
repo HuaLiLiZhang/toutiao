@@ -21,7 +21,7 @@ public class JedisAdapter implements InitializingBean{
 
 
 
-    public static void print(int index, Object obj)
+   /* public static void print(int index, Object obj)
     {
         System.out.println(String.format("%d,%s",index,obj.toString()));
     }
@@ -169,7 +169,7 @@ public class JedisAdapter implements InitializingBean{
         //实现赞和踩的功能。！！！！！
         //一般微博就是使用redis，数据量比较大。
     }
-
+*/
 
 
 
