@@ -139,7 +139,23 @@ public class JedisAdapter {
         print(10,jedis.zrank(rankKey,"Ben"));//正数排名从低到高
         print(11,jedis.zrevrank(rankKey,"Ben"));//反序排名，从高到底
 
-        
+
+        //redis是单线程
+        JedisPool jedisPool=new JedisPool();
+        for(int i=0;i<10;++i)
+        {
+            Jedis j=jedisPool.getResource();
+            j.get("a");
+            System.out.println("POOL"+i);
+            //线程池，连接池，取出一条资源以后，不放回，而因为pool默认只有8条资源
+            //全部被用完了。
+            //如果没有close,那么到达第8个就会停住不打印了,程序也不会暂停。
+            j.close(); //close的话就是相当于把资源重新return回去。继续打印。
+
+        }
+
+        //实现赞和踩的功能。！！！！！
+
 
 
 
