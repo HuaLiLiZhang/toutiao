@@ -1,14 +1,26 @@
 package com.news.toutiao.util;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.*;
+import org.slf4j.Logger;
 
 
 /**
  * Created by huali on 2018/2/1.
  */
-public class JedisAdapter {
+@Service
+public class JedisAdapter implements InitializingBean{
+    private final Logger logger= LoggerFactory.getLogger(TouTiaoUtil.class);
+    private JedisPool pool=null;
+
+
+
+
+
     public static void print(int index, Object obj)
     {
         System.out.println(String.format("%d,%s",index,obj.toString()));
@@ -156,24 +168,104 @@ public class JedisAdapter {
 
         //实现赞和踩的功能。！！！！！
         //一般微博就是使用redis，数据量比较大。
+    }
 
 
 
 
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        //重载的方法。
+        pool=new JedisPool("localhost",6379);
 
 
+    }
 
+    //定义集合的功能。
+    private Jedis getJedis()
+    {
+        //获取线程池资源
+        return  pool.getResource();
+    }
 
+    public long sadd(String key ,String value)
+    {
+        Jedis jedis=null;
+        try {
+            jedis=pool.getResource();
 
+            return  jedis.sadd(key,value);
 
+        }catch (Exception e)
+        {
+            logger.error("发生异常"+e.getMessage());
+            return 0;
+        }
+        finally
+        {
+            if(jedis!=null)
+            {
+                jedis.close();
+            }
+        }
+    }
 
+    public long srem(String key,String value)
+    {
+        Jedis jedis=null;
+        try {
+            jedis=pool.getResource();
+            return jedis.srem(key,value);
+        }catch (Exception e)
+        {
+            logger.error("发生异常"+e.getMessage());
+            return 0;
+        }finally
+        {
+            if(jedis!=null)
+            {
+                jedis.close();
+            }
+        }
+    }
 
+    public boolean sismember(String key,String value)
+    {
+        Jedis jedis=null;
+        try {
+            jedis=pool.getResource();
+            return jedis.sismember(key,value);
+        }catch (Exception e)
+        {
+            logger.error("发生异常"+e.getMessage());
+            return false;
+        }finally
+        {
+            if(jedis!=null)
+            {
+                jedis.close();
+            }
+        }
+    }
 
-
-
-
-
+    public long scard(String key,String value)
+    {
+        Jedis jedis=null;
+        try {
+            jedis=pool.getResource();
+            return jedis.scard(key);
+        }catch (Exception e)
+        {
+            logger.error("发生异常"+e.getMessage());
+            return 0;
+        }finally
+        {
+            if(jedis!=null)
+            {
+                jedis.close();
+            }
+        }
     }
 
 }
