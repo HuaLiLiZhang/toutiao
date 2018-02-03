@@ -40,9 +40,11 @@ public class LikeService {
     public long like(int userId,int entityId,int entityType)
     {
 
+        // 在喜欢集合里增加
         String likeKey= RedisKeyUtil.getLikeKey(entityId,entityType);
         jedisAdapter.sadd(likeKey,String.valueOf(userId));
 
+        // 从反对里删除
         String disLikeKey = RedisKeyUtil.getDisLikeKey(entityId,entityType);
         jedisAdapter.srem(disLikeKey,String.valueOf(userId));
         return jedisAdapter.scard(likeKey);

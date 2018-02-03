@@ -1,10 +1,13 @@
 package com.news.toutiao.controller;
 
+import com.news.toutiao.async.EventProducer;
 import com.news.toutiao.model.EntityType;
 import com.news.toutiao.model.HostHolder;
+import com.news.toutiao.model.News;
 import com.news.toutiao.service.LikeService;
 import com.news.toutiao.service.NewsService;
 import com.news.toutiao.util.TouTiaoUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +37,11 @@ public class LIkeController {
     {
         int userId = hostHolder.getUser().getId();
         long likecount = likeService.like(userId, EntityType.ENTITY_NEWS,newsId);
+
+        News news=newsService.getById(userId);
         newsService.updateLikeCount(newsId,(int) likecount);
+        EventProducer.
+
         return TouTiaoUtil.getJSONString(0,String.valueOf(likecount));//返回到前端，显示新的likecount的数量
 
     }
@@ -42,10 +49,12 @@ public class LIkeController {
     @RequestMapping(path={"/dislike"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
 
-    public String disLike(@RequestParam("newsId") int newsId)
+    public String disLike(@Param("newsId") int newsId)
     {
         int userId=hostHolder.getUser().getId();
         long likeCount = likeService.disLike(userId,EntityType.ENTITY_NEWS,newsId);
+
+        //更新喜欢数
         newsService.updateLikeCount(newsId,(int) likeCount);
         return TouTiaoUtil.getJSONString(0,String.valueOf(likeCount));
     }
