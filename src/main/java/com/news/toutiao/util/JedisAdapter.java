@@ -249,7 +249,7 @@ public class JedisAdapter implements InitializingBean{
         }
     }
 
-    public long scard(String key,String value)
+    public long scard(String key)
     {
         Jedis jedis=null;
         try {
