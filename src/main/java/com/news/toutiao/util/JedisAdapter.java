@@ -367,19 +367,19 @@ public class JedisAdapter implements InitializingBean{
     }
 
 
-    public void setObject(String key, Object obj)
-    {
-        set(key,JSON.toJSONString(obj));
-    }
-    public <T> T getObject(String key,Class<T> clazz)
-    {
-        String value=get(key);
-        if(value!=null)
-        {
-            return JSON.parseObject(value, clazz);
-        }
-        return null;
-    }
+    //public void setObject(String key, Object obj)
+    //{
+    //    set(key,JSON.toJSONString(obj));
+    //}
+    //public <T> T getObject(String key,Class<T> clazz)
+    //{
+    //    String value=get(key);
+    //    if(value!=null)
+    //    {
+    //        return JSON.parseObject(value, clazz);
+    //    }
+    //    return null;
+    //}
 
 
 
