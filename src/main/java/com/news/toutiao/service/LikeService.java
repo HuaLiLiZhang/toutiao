@@ -54,10 +54,10 @@ public class LikeService {
 
         //在反对集合里加
         String disLikeKey = RedisKeyUtil.getDisLikeKey(entityId,entityType);
-        jedisAdapter.srem(disLikeKey,String.valueOf(userId));
+        jedisAdapter.sadd(disLikeKey,String.valueOf(userId));
         //从喜欢里面删除。
         String likeKey= RedisKeyUtil.getLikeKey(entityId,entityType);
-        jedisAdapter.sadd(likeKey,String.valueOf(userId));
+        jedisAdapter.srem(likeKey,String.valueOf(userId));
         return jedisAdapter.scard(likeKey);
 
     }

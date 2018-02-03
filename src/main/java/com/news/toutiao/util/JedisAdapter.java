@@ -3,7 +3,6 @@ package com.news.toutiao.util;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.BinaryClient.LIST_POSITION;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.*;
 import org.slf4j.Logger;
@@ -14,8 +13,8 @@ import org.slf4j.Logger;
  */
 @Service
 public class JedisAdapter implements InitializingBean{
-    private final Logger logger= LoggerFactory.getLogger(TouTiaoUtil.class);
-    private JedisPool pool=null;
+    private static final Logger logger= LoggerFactory.getLogger(JedisAdapter.class);
+    //private JedisPool pool=null;
 
 
 
@@ -172,6 +171,8 @@ public class JedisAdapter implements InitializingBean{
 */
 
 
+   private Jedis jedis=null;
+   private JedisPool pool=null;
 
 
     @Override
@@ -186,8 +187,14 @@ public class JedisAdapter implements InitializingBean{
     private Jedis getJedis()
     {
         //获取线程池资源
+        //如果出现：Could not get a resource from the pool
+        //1.首先检查是否打开redis，cmd 下 运行  ：redis-server.exe  。
+        //2.再检查错误，timeout啊，或则maxmemory什么的，再断点调试，百度解决
         return  pool.getResource();
     }
+
+
+
 
     public long sadd(String key ,String value)
     {
