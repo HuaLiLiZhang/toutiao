@@ -77,7 +77,7 @@
 			run again -->
 		</dependency>
 
-		<!--导入redis 支持的jedis-->
+		<!--导入redis 支持的jedis的库-->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
