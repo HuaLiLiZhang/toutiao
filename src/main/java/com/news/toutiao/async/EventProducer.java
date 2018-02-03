@@ -18,7 +18,12 @@ public class EventProducer {
     {
         try {
             String json= JSONObject.toJSONString(eventModel);
-            String key= RedisKeyUtil.
+            String key= RedisKeyUtil.getEventQueueKey();
+            jedisAdapter.lpush(key, json);
+            return true;
+        }catch (Exception e)
+        {
+            return false;
         }
     }
 
