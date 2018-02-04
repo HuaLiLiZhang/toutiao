@@ -37,7 +37,6 @@ public class LIkeController {
         int userId = hostHolder.getUser().getId();
         long likecount = likeService.like(userId, EntityType.ENTITY_NEWS,newsId);
 
-        News news=newsService.getById(userId);
         newsService.updateLikeCount(newsId,(int) likecount);
 
         return TouTiaoUtil.getJSONString(0,String.valueOf(likecount));//返回到前端，显示新的likecount的数量
