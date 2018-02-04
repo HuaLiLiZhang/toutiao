@@ -69,6 +69,7 @@ public class LoginController {
                       @RequestParam(value="rember",defaultValue = "0") int remember,
                         HttpServletResponse response)
     {
+        System.out.println("ajefiaejfiaowjfeoawihfh");
         try{
             Map<String,Object> map=userService.login(username,password);
             if (map.containsKey("ticket")) {
