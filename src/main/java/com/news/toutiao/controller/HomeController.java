@@ -62,9 +62,14 @@ public class HomeController {
         return vos;
     }
     @RequestMapping(path={"/","/index"},method={RequestMethod.GET,RequestMethod.POST})
-    public String index(Model model)
-    {
+    public String index(Model model, @RequestParam(value="pop",defaultValue = "0") int pop)
+    {                      //这里添加pop，页面再点击登录时，后端传入前端的pop，才会调用弹窗。
         model.addAttribute("vos",getNews(0,0,10));
+        if(hostHolder.getUser()!=null)
+        {
+            pop=0;
+        }
+        model.addAttribute("pop",pop);//并要把它加入model中
         return "home";
     }
 
