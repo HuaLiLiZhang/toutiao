@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by huali on 2018/2/11.
  */
-//代表一个个的事件
+//代表一个个的事件,要触发的事件，，，
 public class EventModel {
     private EventType type;
     private int actorId;
