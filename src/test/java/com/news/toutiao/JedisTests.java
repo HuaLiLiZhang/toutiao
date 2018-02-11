@@ -2,6 +2,7 @@ package com.news.toutiao;
 
 import com.news.toutiao.model.User;
 import com.news.toutiao.util.JedisAdapter;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,10 @@ public class JedisTests {
         user.setPassword("pwd");
         user.setSalt("salt");
 
-        jedisAdapter.setObject("user1",user);
+        jedisAdapter.setObject("user1xxx",user);
+
+        User u=jedisAdapter.getObject("user1xxx",User.class);
+        System.out.println(ToStringBuilder.reflectionToString(u));
 
     }
 
