@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 /**
  * Created by huali on 2018/2/11.
  */
+//发生了事件，就要把它发送出去，用来发送数据，
+// 把数据序列化，然后放在redis的队列里面，就结束。
 @Service
 public class EventProducer {
     private static final Logger logger= LoggerFactory.getLogger(EventProducer.class);

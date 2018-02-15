@@ -5,6 +5,7 @@ import sun.awt.SunHints.Value;
 /**
  * Created by huali on 2018/2/11.
  */
+//表示发生了什么事件
 public enum EventType {
     LIKE(0),
     COMMENT(1),

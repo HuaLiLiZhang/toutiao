@@ -1,5 +1,6 @@
 package com.news.toutiao.controller;
 
+import com.news.toutiao.async.EventProducer;
 import com.news.toutiao.model.EntityType;
 import com.news.toutiao.model.HostHolder;
 import com.news.toutiao.model.News;
@@ -28,6 +29,9 @@ public class LIkeController {
     @Autowired
     NewsService newsService;
 
+    @Autowired
+    EventProducer eventProducer;
+
 
     @RequestMapping(path={"/like"},method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
@@ -39,6 +43,7 @@ public class LIkeController {
 
         newsService.updateLikeCount(newsId,(int) likecount);
 
+        //发出事件出来
         return TouTiaoUtil.getJSONString(0,String.valueOf(likecount));//返回到前端，显示新的likecount的数量
 
     }

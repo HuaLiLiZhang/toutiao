@@ -7,6 +7,7 @@ import java.util.Map;
  * Created by huali on 2018/2/11.
  */
 //代表一个个的事件,要触发的事件，，，
+    //发生线程的一些数据，都打包在eventmodel中
 public class EventModel {
     private EventType type;
     private int actorId;
