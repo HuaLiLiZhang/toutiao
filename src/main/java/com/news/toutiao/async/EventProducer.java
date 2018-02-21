@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventProducer {
     private static final Logger logger= LoggerFactory.getLogger(EventProducer.class);
+
+
     @Autowired
     JedisAdapter jedisAdapter;
 
@@ -37,5 +39,6 @@ public class EventProducer {
             logger.error("发生异常",e.getMessage());
             return false;
         }
+
     }
 }
