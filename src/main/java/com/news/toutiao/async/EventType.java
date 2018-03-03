@@ -1,6 +1,5 @@
 package com.news.toutiao.async;
 
-import sun.awt.SunHints.Value;
 
 /**
  * Created by huali on 2018/2/11.

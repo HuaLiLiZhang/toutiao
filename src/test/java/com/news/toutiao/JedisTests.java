@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ToutiaoApplication.class)
-@Sql("/init-schema.sql")  //add the init-schema.sql
+//@Sql("/init-schema.sql")  //add the init-schema.sql
 public class JedisTests {
     @Autowired
     JedisAdapter jedisAdapter;

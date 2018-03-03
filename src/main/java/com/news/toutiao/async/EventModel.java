@@ -9,13 +9,22 @@ import java.util.Map;
 //代表一个个的事件,要触发的事件，，，
     //发生线程的一些数据，都打包在eventmodel中
 public class EventModel {
-    private EventType type;
-    private int actorId;
-    private int entityType;
-    private int entityId;
-    private int entityOwnerId;
+    private EventType type; //事件类型
+    private int actorId;   //事件触发者
+    private int entityType;  //事件的触发对象
+    private int entityId;  //事件的触发对象的Id
+    private int entityOwnerId;   //触发对象的拥有者
 
-    private Map<String ,String > exts=new HashMap<String ,String >();
+    private Map<String ,String> exts=new HashMap<String ,String>();
+    //现场数据存入，对象表示所有事件，事件类型，谁触发，触发对象是什么，触发拥有者。。。
+
+    public EventModel(EventType type)
+    {
+        this.type= type;
+    }
+
+    public EventModel (){}
+
 
     public String getExt(String key)
     {
@@ -28,10 +37,7 @@ public class EventModel {
         return this;
     }
 
-    public EventModel(EventType type)
-    {
-        this.type= type;
-    }
+
 
     public EventType getType() {
         return type;

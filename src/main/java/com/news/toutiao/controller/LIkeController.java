@@ -49,8 +49,10 @@ public class LIkeController {
         //发出like事件时候，把Event事件记录下来，发出去。以后，再在consum中找到like的handler。
         //然后在调用dohandler
         eventProducer.fireEvent(new EventModel(EventType.LIKE)
-        .setActorId(hostHolder.getUser().getId()).setEntityId(newsId)
-        .setEntityType(EntityType.ENTITY_NEWS).setEntityOwnerId(news.getUserId()));
+        .setActorId(hostHolder.getUser().getId())
+                .setEntityId(newsId)
+        .setEntityType(EntityType.ENTITY_NEWS).
+                        setEntityOwnerId(news.getUserId()));
         return TouTiaoUtil.getJSONString(0,String.valueOf(likecount));//返回到前端，显示新的likecount的数量
 
     }
