@@ -32,7 +32,7 @@ public class LIkeController {
     NewsService newsService;
 
     @Autowired
-    EventProducer eventProducer;
+    EventProducer eventProducer;//发送一个点赞的事件.
 
 
     @RequestMapping(path={"/like"},method = {RequestMethod.GET,RequestMethod.POST})
@@ -46,7 +46,7 @@ public class LIkeController {
         News news=newsService.getById(newsId);
         newsService.updateLikeCount(newsId,(int) likecount);
 
-        //发出like事件时候，把Event事件记录下来，发出去。以后，再在consum中找到like的handler。
+        //发出like事件时候，把Event事件记录下来，发出去。以后，再在consumer中找到like的handler。
         //然后在调用dohandler
         eventProducer.fireEvent(new EventModel(EventType.LIKE)
         .setActorId(hostHolder.getUser().getId())

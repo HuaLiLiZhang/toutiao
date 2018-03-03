@@ -23,7 +23,7 @@ public class EventProducer {
     JedisAdapter jedisAdapter;
 
 
-    public boolean fireEvent(EventModel model)
+    public boolean fireEvent(EventModel model)  //发一个事件
     {
         try {
             String json = JSONObject.toJSONString(model); //序列化

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class EventConsumer  implements InitializingBean, ApplicationContextAware
     @Override
     public void afterPropertiesSet() throws Exception {
         Map<String, EventHandler> beans= applicationContext.getBeansOfType(EventHandler.class);
-        //找出beans需要处理
+        //找出实现了eventHandler接口的类，beans需要处理，做一个路由表
         if(beans!=null)
         {
             for(Map.Entry<String,EventHandler> entry:beans.entrySet())
@@ -81,7 +80,7 @@ public class EventConsumer  implements InitializingBean, ApplicationContextAware
                      EventModel eventModel= JSON.parseObject(message,EventModel.class);
                      if(!config.containsKey(eventModel.getType()))
                      {
-                         logger.error("不能识别事件");
+                         logger.error("不能识别事件，没有定义这种类型");
                          continue;
                      }
                      for(EventHandler handler :config.get(eventModel.getType()))
