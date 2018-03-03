@@ -97,6 +97,7 @@ public class UserService {
             return  map;
         }
         //add ticket present you have register
+        map.put("userId",user.getId());
 
         String ticket=addLoginTicket(user.getId());
         map.put("ticket",ticket);

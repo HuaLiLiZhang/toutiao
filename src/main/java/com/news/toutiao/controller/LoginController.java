@@ -1,8 +1,8 @@
 package com.news.toutiao.controller;
 
-import com.news.toutiao.model.News;
-import com.news.toutiao.model.ViewObject;
-import com.news.toutiao.service.NewsService;
+import com.news.toutiao.async.EventModel;
+import com.news.toutiao.async.EventProducer;
+import com.news.toutiao.async.EventType;
 import com.news.toutiao.service.UserService;
 import com.news.toutiao.util.TouTiaoUtil;
 import org.slf4j.Logger;
@@ -11,12 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sun.security.krb5.internal.Ticket;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +25,9 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    EventProducer eventProducer;
 
     @RequestMapping(path={"/reg/"},method={RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
@@ -79,6 +79,11 @@ public class LoginController {
                     cookie.setMaxAge(3600*24*5);
                 }
                 response.addCookie(cookie);
+
+                eventProducer.fireEvent(new
+                        EventModel(EventType.LOGIN).setActorId((int) map.get("userId"))
+                        .setExt("username", "牛客").setExt("to", "zjuyxy@qq.com"));
+
                 return TouTiaoUtil.getJSONString(0, "登陆成功");//map为空代表注册成功，因为加到User中了
             }else {
                 return TouTiaoUtil.getJSONString(1, map);
