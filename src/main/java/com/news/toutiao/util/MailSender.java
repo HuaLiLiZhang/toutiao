@@ -72,7 +72,7 @@ public class MailSender implements InitializingBean{
 
 
 
-        
+
         mailSender.setHost("smtp.163.com");  //发送邮件的服务器。
         mailSender.setPort(465);  //使用465端口
         mailSender.setProtocol("smtps");  //协议是smtps，即：要加入ssl

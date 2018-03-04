@@ -117,6 +117,9 @@ public class JedisAdapter implements InitializingBean{
         print(8,jedis.scard(likeKey1)); //此时likeKey1中元素为10个，因为加了元素16
         print(9,jedis.smembers(likeKey1));
 
+
+
+         //通用排序！！！！
         // 排序集合，有限队列，排行榜
         String rankKey="rankKey";
         jedis.zadd(rankKey,15,"jim");
