@@ -79,11 +79,11 @@ public class MailSender implements InitializingBean{
         mailSender.setDefaultEncoding("utf-8");
 
 
-        System.out.println(mailSender.getUsername());
-        System.out.println(mailSender.getPassword());
-        System.out.println(mailSender.getHost());
-        System.out.println(mailSender.getPort());
-        System.out.println(mailSender.getProtocol());
+        //System.out.println(mailSender.getUsername());
+        //System.out.println(mailSender.getPassword());
+        //System.out.println(mailSender.getHost());
+        //System.out.println(mailSender.getPort());
+        //System.out.println(mailSender.getProtocol());
         /**
          * 获得邮件会话属性
          */
