@@ -7,9 +7,10 @@
 	<groupId>com.news</groupId>
 	<artifactId>toutiao</artifactId>
 	<!--<version>0.0.1-SNAPSHOT</version>-->
-	<version>1.0</version>
+	<!--<version>1.0</version>-->
 	<packaging>war</packaging>
-	<!--<packaging>jar</packaging>   //这里jar改为war-->
+	<!--<packaging>jar</packaging>-->
+	<!--//这里jar改为war-->
 
 	<name>toutiao</name>
 	<description>Demo project for Spring Boot</description>
