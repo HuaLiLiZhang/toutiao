@@ -31,6 +31,18 @@ user:  $!{user.getName()}
 Include:#include("header.vm")<br>
 Parse:#parse("header.vm")
 
+
+##    Include:#*类似于牛客的每个网页都有底部和头部的显示都是一样的
+##怎么显示，建立.vm
+##* *#
+##
+##Title:$!title
+##
+##Parse:
+##
+##Title:nowcoder
+
+
 ##    预定义函数，宏，即函数定义
 #macro (render_color $color, $index)
     Color By Macro $index, $color
@@ -48,7 +60,12 @@ Parse:#parse("header.vm")
 hword1:$hword1
 hword2:$hword2
 
+##    hword1:hello,world
+##hword2:$!{hello},world
+
+
 $!{color.size()}
+##    3
 
 
 

@@ -53,7 +53,8 @@ public class IndexController {
                           @RequestParam(value="type",defaultValue = "1") int type,
                           @RequestParam(value="key",defaultValue="nowcoder") String key)
     {
-        return String.format("GID{%s},UID{%d},TYPE{%d},KEY{%s}",groupId,userId,type,key);
+        //
+        return String.format("GID:{%s},UID:{%d},TYPE:{%d},KEY:{%s}",groupId,userId,type,key);
     }
 
 
