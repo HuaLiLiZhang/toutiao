@@ -49,7 +49,7 @@ public class LogAspect {
 
     }
 
-    @After("execution(* com.news.toutiao.controller.IndexController.*(..))")
+    @After("execution(* com.news.toutiao.controller.*Controller.*(..))")
     public void afterMethod(JoinPoint joinPoint)
     {
         logger.info("after method;");

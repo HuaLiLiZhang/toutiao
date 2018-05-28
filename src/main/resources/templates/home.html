@@ -60,15 +60,16 @@
 
         <div class="container" id="daily">
             <div class="jscroll-inner">
-                <div class="daily">
+                    <div class="daily">
 
                     #set($cur_date = '')
                     #foreach($vo in $vos)
                     #if ($cur_date != $date.format('yyyy-MM-dd', $vo.news.createdDate))
                         #if ($foreach.index > 0)
-                            </div> ## 上一个要收尾
+                    </div> ## 上一个要收尾
                         #end
                         #set($cur_date = $date.format('yyyy-MM-dd', $vo.news.createdDate))
+                        ##这里以创建时间进行分块显示。
                     <h3 class="date">
                         <i class="fa icon-calendar"></i>
                         <span>头条资讯 &nbsp; $date.format('yyyy-MM-dd', $vo.news.createdDate)</span>
@@ -141,7 +142,7 @@
             </div>
         </div>
 
-    </div>
+    <!--</div>-->
 
 
 #if ($pop)

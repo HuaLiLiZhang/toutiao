@@ -192,7 +192,12 @@ public class IndexController {
 
 
 
-
+    @RequestMapping(value={"/access"})
+    @ResponseBody
+    public String access()
+    {
+        return "hello, you have can access";
+    }
 
 
 
