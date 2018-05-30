@@ -6,6 +6,7 @@ import com.news.toutiao.service.ToutiaoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -191,12 +192,13 @@ public class IndexController {
 
 
 
-
+    @Value("${name}")
+    private String n;
     @RequestMapping(value={"/access"})
     @ResponseBody
     public String access()
     {
-        return "hello, you have can access";
+        return "hello, you have can access ! wellcome "+n;
     }
 
 

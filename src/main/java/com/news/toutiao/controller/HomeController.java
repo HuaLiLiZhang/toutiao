@@ -80,6 +80,7 @@ public class HomeController {
     {
         model.addAttribute("vos",getNews(userId,0,10));
         model.addAttribute("pop",pop);
+        //pop是条用弹窗的请求
         return "home";
     }
 
