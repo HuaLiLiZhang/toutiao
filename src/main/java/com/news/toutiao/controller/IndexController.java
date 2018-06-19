@@ -65,7 +65,14 @@ public class IndexController {
 
 
 
-
+    //路径匹配符
+    //You can map requests using glob patterns and wildcards:
+    //
+    //? matches one character
+    //
+    //* matches zero or more characters within a path segment
+    //
+    //** match zero or more path segments
 
 
 

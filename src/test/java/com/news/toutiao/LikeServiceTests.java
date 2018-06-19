@@ -24,6 +24,8 @@ public class LikeServiceTests {
     LikeService likeService;
 
     //测试的注解
+    //测试方法必须使用注解 org.junit.Test 修饰。
+    //测试方法必须使用 public void 修饰，而且不能带有任何参数。
     @Test
     public void testLikeA()
     {
@@ -55,11 +57,16 @@ public class LikeServiceTests {
 
     }
 
+    //@Test:将一个普通方法修饰成一个测试方法
+    //@Test(excepted=xx.class): xx.class表示异常类，
+    // 表示测试的方法抛出此异常时，认为是正常的测试通过的
+    //@Test(timeout=毫秒数) :测试方法执行时间是否符合预期
     @Test(expected = IllegalArgumentException.class)
     public void testException(){
         throw new IllegalArgumentException("xxxx") ;
     }
 
+    //@Before：会在每一个测试方法被运行前执行一次
     @Before
     public void setUp()
     {
@@ -68,6 +75,7 @@ public class LikeServiceTests {
 
 
     }
+    //@After：会在每一个测试方法运行后被执行一次
     @After
     public void tearDown()
     {
@@ -75,12 +83,14 @@ public class LikeServiceTests {
         System.out.println("tearDown");
 
     }
+    //@BeforeClass： 会在所有的方法执行前被执行，static方法
     @BeforeClass
     public static void beforeclass()
     {
-        System.out.println("boforeclass");
+        System.out.println("beforeclass");
 
     }
+    //@AfterClass：会在所有的方法执行之后进行执行，static方法
     @AfterClass
     public static void afterclass()
     {

@@ -17,6 +17,9 @@ public class HostHolder {
     // 每个ThreadLocal对象包含一个独一无二的threadLocalHashCode值。
     // 使用这个值可以在线程的K-V值对中找回对应的本地线程变量。
 
+    //ThreadLocal不是为了解决多线程访问共享变量，
+    // 而是为每个线程创建一个单独的变量副本，
+    // 提供了保持对象的方法和避免参数传递的复杂性。
 
 
     //线程本地变量,每条线程都存入自己的User内容

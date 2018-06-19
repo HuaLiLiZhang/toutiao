@@ -29,14 +29,15 @@ public class LoginRequiredInterceptor implements HandlerInterceptor{
 
     @Override  //add the override at the generate
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        if (hostHolder.getUser()!=null)
+        if (hostHolder.getUser()==null)
         {
             httpServletResponse.sendRedirect("/?pop=1");
             //httpServletResponse.sendRedirect("/");
             //设置setting访问跳转
-            return true;
+            System.out.println("loginrequriedIntercepter setting!!");
+            return false;
         }
-        return  false;
+        return  true;
 
     }
 

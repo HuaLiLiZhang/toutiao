@@ -171,7 +171,7 @@ public class NewsController {
     }
 
     //上传图片
-
+    //简单的图片上传,核心是MultipartFile file里面，所有数据都在MultipartFile里面
     @RequestMapping(path = {"/uploadImage/"}, method = {RequestMethod.POST})
     @ResponseBody
     public String uploadImage(@RequestParam(value="file") MultipartFile file)
@@ -180,12 +180,15 @@ public class NewsController {
         //if(request instanceof MultipartHttpServletRequest) {}
             try {
                 //file.transferTo();
+                //这里是保存到本地目录。简单的图片上传
                 //String fileUrl = newsService.saveImage(file);
+                //这里是保存到七流云，网上存储图片的一个缓存区。
                 String fileUrl=qiniuService.saveImage(file);
                 if (fileUrl == null) {
                     return TouTiaoUtil.getJSONString(1, "上传图片失败");
                 }
                 return TouTiaoUtil.getJSONString(0, fileUrl);
+            //    返回一个URL的功能。
             } catch (Exception e) {
                 logger.error("上传图片失败" + e.getMessage());
                 return TouTiaoUtil.getJSONString(1, "上传失败");

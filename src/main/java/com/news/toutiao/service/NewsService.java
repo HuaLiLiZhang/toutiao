@@ -43,14 +43,16 @@ public class NewsService {
             return null;
         }
         String fileExt = file.getOriginalFilename().substring(dotPos + 1).toLowerCase();
+        //这个得到后缀名。
         if (!TouTiaoUtil.isFileAllowed(fileExt)) {
             return null;
         }
-
+        //UUID随机生成文件名。
         String fileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + fileExt;
         Files.copy(file.getInputStream(), new File(TouTiaoUtil.IMAGE_DIR + fileName).toPath(),
                 StandardCopyOption.REPLACE_EXISTING);
         return TouTiaoUtil.TOUTIAO_DOMAIN + "image?name=" + fileName;
+    //    返回的地址，URL是是返回给前端的
     }
 
     public int updateCommentCount(int id,int count)

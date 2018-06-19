@@ -16,14 +16,22 @@ public class TouTiaoUtil {
     private static final Logger logger= LoggerFactory.getLogger(IndexController.class);
 
     public static String QINIU_DOMAIN_PREFIX = "http://p2qp1rlg3.bkt.clouddn.com/";
+
+
+    //整个域名的前缀。头条的域名
     public static String TOUTIAO_DOMAIN = "http://127.0.0.1:8080/";
+    //写入图片的本地文件目录
     public static String IMAGE_DIR="e:/JavaBook/MyprojectTouTiao/upload/";
-    //写入图片目录
+
+
+    //满足文件的格式
     public static String[] IMAGE_FILE_EXT=new String[]{"png","bmp","jpg","jpeg"};
 
 
     public static boolean isFileAllowed(String fileExt)
     {
+        //简单遍历，是否符合文件
+        //是否"png","bmp","jpg","jpeg"支持文件上传。
         for(String ext:IMAGE_FILE_EXT)
         {
             if(ext.equals(fileExt))

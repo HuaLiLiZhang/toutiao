@@ -4,5 +4,6 @@
         <scope>application</scope>
         <class>org.apache.velocity.tools.generic.DateTool</class>
     </tool>
-    <!--很多操作时间的类-->
+    <!--很多操作时间的类，在home页面显示的时候，要以时间进行分块显示，这里定义一个日期的显示类
+    定义了XML，还要在properties里面配置-->
 </toolbox>

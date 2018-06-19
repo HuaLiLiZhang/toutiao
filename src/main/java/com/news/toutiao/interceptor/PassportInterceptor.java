@@ -32,6 +32,14 @@ public class PassportInterceptor implements HandlerInterceptor{
     private HostHolder hostHolder;
 
 
+    //preHandle(.)方法返回一个布尔值。
+    // 您可以使用此方法中断或继续处理执行链。
+    // 当此方法返回true时，处理程序执行链将继续；
+    // 当它返回false时，Dispatcherservlet假设拦截器本身已经处理了请求(例如，提供了一个适当的视图)，
+    // 并且不继续执行其他拦截器和执行链中的实际处理程序。
+
+
+
 
     @Override  //add the override at the generate
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
@@ -46,6 +54,7 @@ public class PassportInterceptor implements HandlerInterceptor{
                     break;
                 }
             }
+            System.out.println("PassportIntercepter!!!");
         }
 
         if(ticket!=null)
