@@ -11,13 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +49,8 @@ public class NewsController {
 
 
 
-
+    //咨询的详情页。就是访问http://127.0.0.1:8080/news/6，
+    // 会显示userID为6的用户的咨询的详情，以及评论。
     @RequestMapping(path={"/news/{newsId}"},method = {RequestMethod.GET})
     public String newsDetail(@PathVariable("newsId") int newsId, Model model)
     {
@@ -117,6 +116,11 @@ public class NewsController {
     }
 
 
+
+
+
+
+//    咨询的添加页面。
 //展示图片
     @RequestMapping(path={"/image"},method = RequestMethod.GET)
     @ResponseBody
@@ -126,15 +130,31 @@ public class NewsController {
         try {
             response.setContentType("image/jpeg");
             //response.getOutputStream();
+            //从本地下载图片到浏览器上。
             StreamUtils.copy(new FileInputStream(new File(TouTiaoUtil.IMAGE_DIR+imageName)),
                     response.getOutputStream());
+        //    若从七牛云下载到浏览器查看呢?
+
         }catch (Exception e)
         {
             logger.error("读取图片错误"+e.getMessage());
 
         }
 
+    }
 
+
+    //从七牛云下载图片到本地。有待思考,可以显示了
+    @RequestMapping(path ={"/download"}, method = RequestMethod.GET)
+    //@ResponseBody
+    public String download(Model model, @RequestParam("url") String targeturl,
+                           HttpServletResponse response)
+    {
+        String qiniuyunUrl =  qiniuService.getDownloadUrl(targeturl);
+        //StreamUtils.copy(new FileInputStream(new File(qiniuyunUrl)),
+        //        response.getOutputStream());
+        model.addAttribute("url", qiniuyunUrl);
+        return "download";
 
     }
 
@@ -152,7 +172,7 @@ public class NewsController {
                news.setUserId(hostHolder.getUser().getId());
             }else
             {
-                //匿名用户id
+                //匿名用户id，自己随便定义
                 news.setUserId(3);
             }
             news.setImage(image);
@@ -161,6 +181,7 @@ public class NewsController {
             news.setLink(link);
 
             newsService.addNews(news);
+            //返回正确的
             return TouTiaoUtil.getJSONString(0);
 
         }catch (Exception e)

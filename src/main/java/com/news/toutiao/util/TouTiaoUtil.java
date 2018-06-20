@@ -15,6 +15,7 @@ import java.util.Map;
 public class TouTiaoUtil {
     private static final Logger logger= LoggerFactory.getLogger(IndexController.class);
 
+    //申请下来的七牛云的前缀
     public static String QINIU_DOMAIN_PREFIX = "http://p2qp1rlg3.bkt.clouddn.com/";
 
 

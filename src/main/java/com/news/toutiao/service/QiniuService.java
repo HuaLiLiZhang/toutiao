@@ -56,7 +56,9 @@ public class QiniuService {
             Response res = uploadManager.put(file.getBytes(),fileName,getUpToken());
             //打印返回的信息
             System.out.println(res.toString());
-            //return null;
+            System.out.println(res.bodyString());
+            //怎么解析res呢，这其实是一个json的格式，有hash, 有key
+            //
             if(res.isOK()&&res.isJson())
             {
                 String key = JSONObject.parseObject(res.bodyString()).get("key").toString();
@@ -75,6 +77,16 @@ public class QiniuService {
             return null;
         }
     }
+
+    //自己添加用于从七牛云下载图片。
+    public  String getDownloadUrl(String targeturl)
+    {
+        String downloadUrl = TouTiaoUtil.QINIU_DOMAIN_PREFIX+targeturl;
+        return downloadUrl;
+    }
+
+
+
 
 
 }
