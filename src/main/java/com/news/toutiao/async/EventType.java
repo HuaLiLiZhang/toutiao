@@ -12,6 +12,6 @@ public enum EventType {
     MAIL(3);
 
     private int value;
-    EventType(int value){this.value=value;}
+    private EventType(int value){this.value=value;}  //枚举类型的构造函数默认为private
     public int getValue(){return value;}
 }

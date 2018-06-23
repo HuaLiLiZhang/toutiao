@@ -32,7 +32,7 @@ public class EventProducer {
 
             String key = RedisKeyUtil.getEventQueueKey();//放入到队列中
             jedisAdapter.lpush(key, json);
-            return true;
+            return true;   //事件产生者将事件推进去，事件key是EVENT， 类型是引入的事件类型，model
 
         }catch (Exception e)
         {

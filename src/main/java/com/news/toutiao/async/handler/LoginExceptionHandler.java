@@ -33,13 +33,15 @@ public class LoginExceptionHandler implements EventHandler{
         message.setCreatedDate(new Date());
         message.setConversationId("_"+model.getActorId());
         messageService.addMessage(message);
+        //前面是对登录异常的用户，发一个消息。
+
 
         Map<String ,Object>map = new HashMap<String ,Object>();
         map.put("username",model.getExt("username"));
 
         mailSender.sendWithHTMLTemplate(model.getExt("toemail"),"登录异常",
                 "mails/welcome.html",map);
-
+    //    后面是对异常登录的用户发送邮件。
     }
 
     @Override

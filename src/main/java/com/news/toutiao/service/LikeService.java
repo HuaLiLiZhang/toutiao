@@ -47,7 +47,7 @@ public class LikeService {
         // 从反对里删除
         String disLikeKey = RedisKeyUtil.getDisLikeKey(entityId,entityType);
         jedisAdapter.srem(disLikeKey,String.valueOf(userId));
-        return jedisAdapter.scard(likeKey);
+        return jedisAdapter.scard(likeKey);  //返回like的个数。
 
     }
 

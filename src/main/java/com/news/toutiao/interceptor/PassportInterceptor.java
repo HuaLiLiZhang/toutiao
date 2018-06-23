@@ -21,7 +21,8 @@ import java.util.Date;
 @Component
 public class PassportInterceptor implements HandlerInterceptor{
     //2.做一个拦截器，在每次访问之前，拦截器插入进来，确定用户是否存在。
-    //认证用户是否已经登录
+    //认证用户是否已经登录,即是不同页面之间，如果前面页面已经登录，则获得ticket，
+    // 下一个页面刷新时候，自动获取用户登录状态。并把它user保存在hostholder这个状态中，
     @Autowired
     private LoginTicketDAO loginTicketDAO;
 

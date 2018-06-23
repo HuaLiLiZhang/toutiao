@@ -39,6 +39,7 @@ public class LikeHandler  implements EventHandler{
         message.setConversationId(model.getActorId()+"_"+model.getEntityOwnerId());
         messageService.addMessage(message);
 
+        System.out.println("这里发生了点赞嗷嗷。。。。"+user.getName()+"赞了你的资讯，"+"被点赞的人是："+model.getEntityId());
 
     }
 

@@ -31,6 +31,10 @@ public interface CommentDAO {
                       @Param("entityType") int entityType,
                       @Param("status") int status);
 
+    //分页显示，写在这里
+
+
+
     @Select({"select",SELECT_FILEDS,"from",TABLE_NAME,
             "where entity_id=#{entityId} and entity_type=#{entityType} order by id desc" })
     List<Comment> selectByEntity(@Param("entityId") int entityId,

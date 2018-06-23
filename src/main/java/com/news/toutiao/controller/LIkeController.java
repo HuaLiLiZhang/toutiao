@@ -43,11 +43,12 @@ public class LIkeController {
         int userId = hostHolder.getUser().getId();
         long likecount = likeService.like(userId, EntityType.ENTITY_NEWS,newsId);
 
-        News news=newsService.getById(newsId);
+        News news=newsService.getById(newsId);  //点赞点踩的功能是在新闻news里面的字段。
+        //所以newservice.updateLikecount。
         newsService.updateLikeCount(newsId,(int) likecount);
 
         //发出like事件时候，把Event事件记录下来，发出去。以后，再在consumer中找到like的handler。
-        //然后在调用dohandler
+        //然后在调用dohandler，这里like事件发生，事件产生。
         eventProducer.fireEvent(new EventModel(EventType.LIKE)
         .setActorId(hostHolder.getUser().getId())
                 .setEntityId(newsId)

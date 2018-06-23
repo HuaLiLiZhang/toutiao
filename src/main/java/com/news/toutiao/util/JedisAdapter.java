@@ -181,12 +181,11 @@ public class JedisAdapter implements InitializingBean{
    private JedisPool pool=null;
 
 
+    //实现的接口，可以在加载的时候就将Jedis加载进去。
     @Override
     public void afterPropertiesSet() throws Exception {
         //重载的方法。
         pool=new JedisPool("localhost",6379);
-
-
     }
 
     //定义集合的功能。
@@ -261,7 +260,7 @@ public class JedisAdapter implements InitializingBean{
             }
         }
     }
-
+    //点两下赞，则没有点=点赞，要删除
     public long srem(String key,String value)
     {
         Jedis jedis=null;
@@ -319,7 +318,7 @@ public class JedisAdapter implements InitializingBean{
         }
     }
 
-    public void setex(String key,String value)
+    public void setex(String key,String value) //设置某一对数值的有效时间。
     {
         //验证码 防机器注册，记录上次注册时间，有效期3天
         Jedis jedis =null;

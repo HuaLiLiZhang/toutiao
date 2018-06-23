@@ -42,6 +42,7 @@ public class EventConsumer  implements InitializingBean, ApplicationContextAware
     public void afterPropertiesSet() throws Exception {
         Map<String, EventHandler> beans= applicationContext.getBeansOfType(EventHandler.class);
         //找出实现了eventHandler接口的类，beans需要处理，做一个路由表
+        //先将Event，和eventhandler取出来放在config中。
         if(beans!=null)
         {
             for(Map.Entry<String,EventHandler> entry:beans.entrySet())
@@ -84,7 +85,10 @@ public class EventConsumer  implements InitializingBean, ApplicationContextAware
                          continue;
                      }
                      for(EventHandler handler :config.get(eventModel.getType()))
+                         //private Map<EventType,List<EventHandler>> config= new HashMap<EventType,List<EventHandler>>();
+                     //    config.get(eventModel.getType())是得到List<EventHandler>
                      {
+                         //然后对不同的handler进行处理。
                          handler.doHandler(eventModel);
                      }
                  }

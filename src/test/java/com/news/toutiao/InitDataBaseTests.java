@@ -62,6 +62,8 @@ public class InitDataBaseTests {
 
 			newsDAO.addNews(news);
 
+
+			//test给每一条咨询添加三天咨询
 			for(int j=0;j<3;j++)  //每条资讯加三条评论
 			{
 				Comment comment=new Comment();
@@ -72,8 +74,6 @@ public class InitDataBaseTests {
 				comment.setCreatedDate(new Date());
 				comment.setContent("Comment "+String.valueOf(j));
 				commentDAO.addComment(comment);
-
-
 			}
 
 
@@ -110,6 +110,7 @@ public class InitDataBaseTests {
 		Assert.assertEquals(2,loginTicketDAO.selectByTicket("TICKET1").getStatus());
 
 
+		//插入的方法正确，读取的方法正确。取得第一条，肯定不为0，插入正确。
 		Assert.assertNotNull(commentDAO.selectByEntity(1,EntityType.ENTITY_NEWS).get(0));
 
 	}

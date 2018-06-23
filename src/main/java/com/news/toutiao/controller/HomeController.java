@@ -66,6 +66,10 @@ public class HomeController {
     {                      //这里添加pop，页面再点击登录时，后端传入前端的pop，才会调用弹窗。
         model.addAttribute("vos",getNews(0,0,10));
         //这里只显示10条资讯。因为getNews(userId, offset, limit),limit 设置了10.
+
+        //在此页面加载前，使用拦截器，获取了登录用户的User，
+        // 此时判断if(hostHolder.getUser()!=null),可以获得用户信息，并将其显示在网页上。
+        //前端也做了处理，如果user存在，则登录显示用户名，否则还是显示登录。
         if(hostHolder.getUser()!=null)
         {
             pop=0;

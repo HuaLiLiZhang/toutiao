@@ -158,18 +158,28 @@
         var that = this;
         var oData = that.val();
         var bRight = true;
-        /*
-        if (!Util.isEmail(oData.email)) {
-            that.iptError(that.emailIpt, '请填写正确的邮箱');
+
+        // if (!Util.isEmail(oData.email)) {
+        //     that.iptError(that.emailIpt, '请填写正确的邮箱');
+        //     bRight = false;
+        // }
+        if (!oData.email) {
+            that.iptError(that.emailIpt, '用户名不能为空');
             bRight = false;
-        }*/
-        if (!oData.pwd) {
+
+        }else if (!oData.pwd) {
             that.iptError(that.pwdIpt, '密码不能为空');
             bRight = false;
+
         } else if (oData.pwd.length < 6) {
             that.iptError(that.pwdIpt, '密码不能小于6位');
             bRight = false;
         }
+        // else if (oData.pwd)
+        // {
+        //     that.iptError(that.pwdIpt, "密码不正确");
+        //     bRight = false;
+        // }
         return bRight;
     }
 

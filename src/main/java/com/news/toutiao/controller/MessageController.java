@@ -88,7 +88,7 @@ public class MessageController {
                 messages.add(vo);
 
             }
-            model.addAttribute("message",messages);
+            model.addAttribute("messages",messages);
 
         }catch (Exception e )
         {

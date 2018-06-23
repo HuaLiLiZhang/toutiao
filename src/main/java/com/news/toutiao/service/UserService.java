@@ -43,7 +43,11 @@ public class UserService {
             map.put("msgpassword","密码不能为空");
             return  map;
         }
-
+        //if(!username.matches("[a-zA-Z0-9_]+@[a-zA-Z0-9]+(\\.[a-zA-Z]{1,3})+"))
+        //{
+        //    map.put("msgusername","用户名不符合邮箱格式");
+        //    return map;
+        //}
         User user=userDAO.selectByName(username);
         if(user!=null)
         {
@@ -79,7 +83,7 @@ public class UserService {
         }
         if(StringUtils.isBlank(password))
         {
-            map.put("msgpassword","密码不能为空");
+            map.put("msgpassword","密码不能为空!!!");
             return  map;
         }
 
@@ -90,8 +94,7 @@ public class UserService {
             return  map;
         }
 
-        if(!TouTiaoUtil.MD5(password+user.getSalt()).equals(
-                user.getPassword()))
+        if(!TouTiaoUtil.MD5(password+user.getSalt()).equals(user.getPassword()))
         {
             map.put("password","密码不正确");
             return  map;

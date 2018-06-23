@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,7 +50,8 @@ public class NewsController {
 
 
 
-    //咨询的详情页。就是访问http://127.0.0.1:8080/news/6，
+    //咨询的详情页。点击发布的新闻，回跳转的时候，显示的页面。
+    // 就是访问http://127.0.0.1:8080/news/6，
     // 会显示userID为6的用户的咨询的详情，以及评论。
     @RequestMapping(path={"/news/{newsId}"},method = {RequestMethod.GET})
     public String newsDetail(@PathVariable("newsId") int newsId, Model model)
@@ -77,9 +79,14 @@ public class NewsController {
 
             }
             model.addAttribute("comments",commentVOs);
+
+            //分页显示
+            //int totalsize = commentVOs.size();
         }
         model.addAttribute("news",news);
+        //owner是代表分享者的用户。
         model.addAttribute("owner", userService.getUser(news.getUserId()));
+
         return "detail";
     }
 
@@ -89,7 +96,21 @@ public class NewsController {
                              @RequestParam("content") String content)
     {
         try {
+            //过滤特殊字符，课后作业，发布敏感词需要过滤
             //过滤content
+            if(hostHolder.getUser()==null)
+            {
+                return TouTiaoUtil.getJSONString(1, "请先登录");
+            }
+            if(StringUtils.isEmpty(content.trim()))
+            {
+                return TouTiaoUtil.getJSONString(1, "评论为空");
+            }
+            if(content.length()>=8)
+            {
+                return TouTiaoUtil.getJSONString(1, "评论数字超过限制");
+            }
+
             Comment comment=new Comment();
             comment.setUserId(hostHolder.getUser().getId());
             comment.setContent(content);
@@ -105,7 +126,6 @@ public class NewsController {
 
             //怎么异步化
 
-            //过滤特殊字符，课后作业，发布敏感词需要过滤
 
 
         }catch (Exception e)

@@ -80,6 +80,7 @@ public class LoginController {
                 }
                 response.addCookie(cookie);
 
+                //登录时间的异步队列。
                 eventProducer.fireEvent(new
                         EventModel(EventType.LOGIN).setActorId((int) map.get("userId"))
                         .setExt("username", username).setExt("toemail", "1482708264@qq.com"));
@@ -90,7 +91,6 @@ public class LoginController {
             }
 //{"code":0,"msg":"dfsdg"}, <b>xml</b> json数据格式
         }
-
         catch (Exception e)
         {
             logger.error("登录异常"+e.getMessage());

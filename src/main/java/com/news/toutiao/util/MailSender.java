@@ -35,7 +35,7 @@ public class MailSender implements InitializingBean{
         try {//这里随便写自己的邮箱的昵称。用于发给对方，对方显示看到。
             //邮箱格式<自己邮箱名>，否则会报错，发送邮箱失败。com.sun.mail.smtp.SMTPSenderFailedException: 553 Mail from must equal authorized user
             String nick = MimeUtility.encodeText("newcoder");//邮件名,昵称，发件人信息。
-            InternetAddress from = new InternetAddress(nick+"<uestczhanghuali@163.com>");  //发件地址
+            InternetAddress from = new InternetAddress(nick+"<xxxxxxxx@163.com>");  //发件地址
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
             //发邮件时，也可以应用模板，将一份模板和一些参数，进行渲染。模板不是固定的，人为进行设置。
@@ -59,7 +59,7 @@ public class MailSender implements InitializingBean{
     @Override
     public void afterPropertiesSet() throws Exception {
         mailSender = new JavaMailSenderImpl();//系统自带的JavaMailSenderImpl的实现。
-        mailSender.setUsername("uestczhanghuali@163.com");
+        mailSender.setUsername("xxxxxxxx@163.com");
         //此处设置登录的密码,这个密码非常重要，它不是邮箱账户的登录密码，而是应用密码，需要登录邮箱，在设置中开启此应用
         //即在邮箱设置中：进行授权，设置客户端授权码:
         //否则很可能出现如下错误：
@@ -68,7 +68,7 @@ public class MailSender implements InitializingBean{
 
 
 
-        mailSender.setPassword("自己授权码");
+        mailSender.setPassword("124353645746");
 
 
 
