@@ -80,10 +80,12 @@ public class LoginController {
                 }
                 response.addCookie(cookie);
 
-                //登录时间的异步队列。
+                //登录事件的异步队列。
                 eventProducer.fireEvent(new
                         EventModel(EventType.LOGIN).setActorId((int) map.get("userId"))
                         .setExt("username", username).setExt("toemail", "1482708264@qq.com"));
+                //{"actorId":31,"entityId":0,"entityOwnerId":0,"entityType":0,
+                // "exts":{"toemail":"1482708264@qq.com","username":"lili"},"type":"LOGIN"}
 
                 return TouTiaoUtil.getJSONString(0, "登陆成功");//map为空代表注册成功，因为加到User中了
             }else {

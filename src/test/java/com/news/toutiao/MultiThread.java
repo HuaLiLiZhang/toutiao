@@ -145,7 +145,7 @@ public class MultiThread {
     }
 
     public static void testAtomic(){
-        testWithAtomic();
+        testWithAtomic();  //多线程AtomicInteger，加加的时候，要使用原子性操作。
         testWithoutAtomic();
     }
 
@@ -158,18 +158,18 @@ public class MultiThread {
 
     public static void testThreadLocal()
     {
-        for(int i = 0;i<10;++i)
-        {
-            final int finalI=i;
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    threadLocalUserId.set(finalI);
-                    sleep(1000);
-                    System.out.println("ThreadLocal:"+threadLocalUserId.get());
-                }
-            }).start();
-        }
+        //for(int i = 0;i<10;++i)
+        //{
+        //    final int finalI=i;
+        //    new Thread(new Runnable() {
+        //        @Override
+        //        public void run() {
+        //            threadLocalUserId.set(finalI);
+        //            sleep(1000);
+        //            System.out.println("ThreadLocal:"+threadLocalUserId.get());
+        //        }
+        //    }).start();
+        //}
 
         for(int i = 0;i<10;++i)
         {
@@ -178,21 +178,44 @@ public class MultiThread {
                 @Override
                 public void run() {
                     userId = finalI;
-                    sleep(1000);
-                    System.out.println("NonThreadLocal:"+userId);
+                    //如果线程不sleep的话，则会出现userID混乱
+                    //NonThreadLocal:1
+                    //NonThreadLocal:5
+                    //NonThreadLocal:0
+                    //NonThreadLocal:4
+                    //NonThreadLocal:6
+                    //NonThreadLocal:4
+                    //NonThreadLocal:3
+                    //NonThreadLocal:7
+                    //NonThreadLocal:9
+                    //NonThreadLocal:8
+                    //sleep(1000);
+                    //使用sleep，1秒之后，多个线程都已经执行完毕，
+                    // 所以都是一个固定的数，6,7,8，9.。。。
+                    //NonThreadLocal:6
+                    //NonThreadLocal:6
+                    //NonThreadLocal:6
+                    //NonThreadLocal:6
+                    //NonThreadLocal:6
+                    //NonThreadLocal:6
+                    //NonThreadLocal:6
+                    //NonThreadLocal:6
+                    //NonThreadLocal:6
+                    //NonThreadLocal:6
+                    System.out.println("NonThreadLocal:"+Thread.currentThread().getName()+":"+userId);
                 }
             }).start();
         }
     }
 
-
+    //线程池任务框架。
     public static void testExcutor(){
-        //ExecutorService service = Executors.newSingleThreadExecutor();
+        ExecutorService service = Executors.newSingleThreadExecutor();
         //所有任务都由ExecutorService来执行。只有一个线程
         //executor ：提供一个运行任务的框架。
         //将任务和如何运行任务解耦。
         //用于提供线程池或定时任务服务。
-        ExecutorService service = Executors.newFixedThreadPool(2);
+        //ExecutorService service = Executors.newFixedThreadPool(2);
         //所有任务都由ExecutorService来执行。有两个线程，同时进行。多个线程池
         service.submit(new Runnable() {
             @Override
@@ -262,8 +285,8 @@ public class MultiThread {
         //testBlockingQueue();
         //testAtomic();
         //testThreadLocal();
-        //testExcutor();
-        testFuture();
+        testExcutor();
+        //testFuture();
     }
 }
 

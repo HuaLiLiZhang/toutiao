@@ -1,6 +1,8 @@
 package com.news.toutiao;
 
+import com.news.toutiao.model.News;
 import com.news.toutiao.service.LikeService;
+import com.news.toutiao.service.NewsService;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class LikeServiceTests {
     @Autowired
     LikeService likeService;
 
+    @Autowired
+    NewsService newsService;
+
     //测试的注解
     //测试方法必须使用注解 org.junit.Test 修饰。
     //测试方法必须使用 public void 修饰，而且不能带有任何参数。
@@ -31,10 +36,14 @@ public class LikeServiceTests {
     {
         //2.测试
         System.out.println("testLikeA");
-        likeService.like(123,1,1);
+        long likecount = likeService.like(14,1,1);
+        //News news = newsService.getById(16);
+        //int count = news.getLikeCount();
+        //newsService.updateLikeCount(16,(int)likecount+count);
 
-        Assert.assertEquals(1,likeService.getLikeStatus(123,1,1));
+        Assert.assertEquals(1,likeService.getLikeStatus(14,1,1));
         //确认这个一定是这样，否则报错。
+
 
     }
 

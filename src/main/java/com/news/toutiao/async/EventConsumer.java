@@ -79,6 +79,7 @@ public class EventConsumer  implements InitializingBean, ApplicationContextAware
                          continue;
                      }
                      EventModel eventModel= JSON.parseObject(message,EventModel.class);
+                     //反序列化
                      if(!config.containsKey(eventModel.getType()))
                      {
                          logger.error("不能识别事件，没有定义这种类型");

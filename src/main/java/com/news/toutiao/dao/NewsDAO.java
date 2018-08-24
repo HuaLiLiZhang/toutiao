@@ -27,6 +27,8 @@ public interface NewsDAO {
     @Update({"update ", TABLE_NAME, " set comment_count = #{commentCount} where id=#{id}"})
     int updateCommentCount(@Param("id") int id, @Param("commentCount") int commentCount);
 
+
+    //这个使用XML文件配置
     List<News> selectByUserIdAndOffset(@Param("userId") int userId,
                                        @Param("offset") int offset,
                                        @Param("limit") int limit);

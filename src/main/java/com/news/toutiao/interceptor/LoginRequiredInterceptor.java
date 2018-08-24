@@ -1,19 +1,13 @@
 package com.news.toutiao.interceptor;
 
-import com.news.toutiao.dao.LoginTicketDAO;
-import com.news.toutiao.dao.UserDAO;
 import com.news.toutiao.model.HostHolder;
-import com.news.toutiao.model.LoginTicket;
-import com.news.toutiao.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
 /**
  * Created by huali on 2018/1/13.
